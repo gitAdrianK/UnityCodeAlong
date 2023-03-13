@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
+			"**/*.meta": true,
+			"**/*.prefab": true,
+			"**/*.png": true,
+			"**/*.unity": true,
+			"**/TextMesh Pro": true
+		}
+	}
+}
