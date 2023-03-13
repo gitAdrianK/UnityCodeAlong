@@ -55,7 +55,7 @@ public abstract class Item : ScriptableObject
     // override object.Equals
     public override bool Equals(object obj)
     {
-        if (!obj || this.GetType() != obj.GetType())
+        if (null == obj || this.GetType() != obj.GetType())
         {
             return false;
         }

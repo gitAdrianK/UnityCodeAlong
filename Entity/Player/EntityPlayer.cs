@@ -35,7 +35,7 @@ public class EntityPlayer : Entity
     {
         base.Initialize(name, life, attack, defense);
         this.gold = gold;
-        if (!items)
+        if (null == items)
         {
             items = new Dictionary<Item, int>();
         }

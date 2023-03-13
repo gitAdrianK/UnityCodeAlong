@@ -14,7 +14,7 @@ public class EncounterChest : Encounter
     private Item item;
 
     // Start is called before the first frame update
-    public new void Start()
+    public override void Start()
     {
         base.Start();
         // Chance to be a gold chest, item chest otherwise.

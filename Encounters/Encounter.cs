@@ -12,13 +12,13 @@ public abstract class Encounter : MonoBehaviour
     private float movespeed;
 
     // Start is called before the first frame update
-    public void Start()
+    public virtual void Start()
     {
         this.movespeed = 5f;
     }
 
     // Update is called once per frame
-    public void Update()
+    public virtual void Update()
     {
         transform.Translate(Vector2.left * movespeed * Time.deltaTime);
     }

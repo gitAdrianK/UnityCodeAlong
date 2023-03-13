@@ -12,7 +12,7 @@ public class EncounterFight : Encounter
     private LinkedList<Enemy> enemies;
 
     // Start is called before the first frame update
-    public new void Start()
+    public override void Start()
     {
         base.Start();
         enemies = new LinkedList<Enemy>();

@@ -13,7 +13,7 @@ public class EncounterMerchant : Encounter
     LinkedList<int> prices;
 
     // Start is called before the first frame update
-    public new void Start()
+    public override void Start()
     {
         base.Start();
     }
