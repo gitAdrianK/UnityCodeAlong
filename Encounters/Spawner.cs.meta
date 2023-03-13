@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 610cc0c3d2d171b43871ba838409a457
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - fight: {fileID: 7072801644148936266, guid: 67c338c20c6651841aa7147347040906, type: 3}
+  - chest: {fileID: 5366832128390255789, guid: 81f24581cdaf56044aa662d136e68306, type: 3}
+  - merchant: {fileID: 7743988725631413126, guid: 8a5730c0725c94f48a4701ffb83ed449, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
