@@ -13,6 +13,7 @@ public abstract class Enemy : Entity
     /// </summary>
     public abstract void OnDeath(EntityPlayer player);
 
+    // override object.ToString
     public override string ToString()
     {
         return base.ToString() + "\nEnemy - ";

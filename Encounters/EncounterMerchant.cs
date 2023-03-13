@@ -8,16 +8,17 @@ using UnityEngine;
 /// <seealso cref="Encounter" />
 public class EncounterMerchant : Encounter
 {
-    // The items offered.
+    // The items and prices of offered items.
     LinkedList<Item> items;
-    // The prices of the offered items.
     LinkedList<int> prices;
 
+    // Start is called before the first frame update
     public new void Start()
     {
         base.Start();
     }
 
+    // override encounter.HandleEncounter
     public override void HandleEncounter(EntityPlayer player)
     {
         // TODO: Merchant UI

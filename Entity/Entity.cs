@@ -21,7 +21,7 @@ public abstract class Entity : ScriptableObject
     public int Defense { get => defense; }
 
     /// <summary>
-    /// Initialize.
+    /// Initializes the object with given values.
     /// </summary>
     /// <param name="name">The name.</param>
     /// <param name="life">The life.</param>
@@ -80,6 +80,7 @@ public abstract class Entity : ScriptableObject
         defense += value;
     }
 
+    // override object.ToString
     public override string ToString()
     {
         return "Entity - Name: " + Name + ", Maxlife: " + MaxLife + ", Currentlife: " + CurrentLife + ", Attack: " + Attack + ", Defense: " + Defense;

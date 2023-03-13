@@ -59,6 +59,7 @@ public class Spawner : MonoBehaviour
         merchantCooldown--;
     }
 
+    // Triggers when another collider exits the collider of this object.
     void OnTriggerExit2D(Collider2D other)
     {
         GameObject gameObject = other.gameObject;

@@ -9,23 +9,35 @@ using UnityEngine;
 public class EntityPlayer : Entity
 {
     private int gold;
-    private Dictionary<string, int> items;
+    private Dictionary<Item, int> items;
 
     public int Gold { get => gold; }
-    public Dictionary<string, int> Items { get => items; }
+    public Dictionary<Item, int> Items { get => items; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EntityPlayer"/> class.
+    /// </summary>
     public EntityPlayer()
     {
         this.Initialize("Default Player", 100, 10, 10, 0, null);
     }
 
-    public void Initialize(string name, int life, int attack, int defense, int gold, Dictionary<string, int> items)
+    /// <summary>
+    /// Initializes the object with given values.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="life">The life.</param>
+    /// <param name="attack">The attack.</param>
+    /// <param name="defense">The defense.</param>
+    /// <param name="gold">The gold.</param>
+    /// <param name="items">The items.</param>
+    public void Initialize(string name, int life, int attack, int defense, int gold, Dictionary<Item, int> items)
     {
         base.Initialize(name, life, attack, defense);
         this.gold = gold;
-        if (items == null)
+        if (!items)
         {
-            items = new Dictionary<string, int>();
+            items = new Dictionary<Item, int>();
         }
         this.items = items;
     }
@@ -49,16 +61,15 @@ public class EntityPlayer : Entity
     /// <param name="item">The item to add.</param>
     public void AddItem(Item item)
     {
-        if (item == null)
+        if (!item)
         {
             return;
         }
-        string name = item.Name;
-        if (!items.ContainsKey(name))
+        if (!items.ContainsKey(item))
         {
-            items.Add(name, 0);
+            items.Add(item, 0);
         }
-        items[name] = ++items[name];
+        items[item] = ++items[item];
         item.OnItemGained(this);
     }
 
@@ -68,30 +79,30 @@ public class EntityPlayer : Entity
     /// <param name="item">The item to remove.</param>
     public void RemoveItem(Item item)
     {
-        if (item == null)
+        if (!item)
         {
             return;
         }
-        string name = item.Name;
-        if (!items.ContainsKey(name))
+        if (!items.ContainsKey(item))
         {
             return;
         }
-        items[name] = --items[name];
-        if (items[name] <= 0)
+        items[item] = --items[item];
+        if (items[item] <= 0)
         {
-            items.Remove(name);
+            items.Remove(item);
         }
         item.OnItemLost(this);
     }
 
+    // override object.ToString
     public override string ToString()
     {
         string str = "";
         str += base.ToString() + "\nPlayer - Gold: " + Gold + ", Items:\n";
-        foreach (KeyValuePair<string, int> kvp in items)
+        foreach (KeyValuePair<Item, int> kvp in items)
         {
-            str += kvp.Key + ": " + kvp.Value + "\n";
+            str += kvp.Key.Name + ": " + kvp.Value + "\n";
         }
         return str;
     }

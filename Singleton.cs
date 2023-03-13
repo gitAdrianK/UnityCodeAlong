@@ -12,6 +12,7 @@ public class Singleton : MonoBehaviour
 
     public EntityPlayer entityPlayer;
 
+    // Awake is called when the script instance is being loaded
     public void Awake()
     {
         if (instance != null)

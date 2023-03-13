@@ -28,13 +28,14 @@ public class EncounterChest : Encounter
         }
     }
 
+    // override encounter.HandleEncounter
     public override void HandleEncounter(EntityPlayer player)
     {
         // TODO: Chest UI
         // Time.timeScale = 0.0f;
 
         // Adds gold or the item to the player.
-        if (item != null)
+        if (item)
         {
             player.AddItem(item);
         }

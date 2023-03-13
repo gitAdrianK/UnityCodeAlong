@@ -29,6 +29,11 @@ public abstract class Item : ScriptableObject
     public string Name { get => name; }
     public string Description { get => description; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Item"/> class.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="description">The description.</param>
     protected Item(string name, string description)
     {
         this.name = name;
@@ -47,6 +52,24 @@ public abstract class Item : ScriptableObject
     /// <param name="player">The player.</param>
     public abstract void OnItemLost(EntityPlayer player);
 
+    // override object.Equals
+    public override bool Equals(object obj)
+    {
+        if (!obj || this.GetType() != obj.GetType())
+        {
+            return false;
+        }
+        Item other = (Item)obj;
+        return this.Name == other.Name;
+    }
+
+    // override object.GetHashCode
+    public override int GetHashCode()
+    {
+        return this.Name.GetHashCode();
+    }
+
+    // override object.ToString
     public override string ToString()
     {
         return "Item - Name: " + Name;

@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private EntityPlayer entityPlayer;
     [SerializeField] private GameObject playerHUD;
 
-
+    // Start is called before the first frame update
     public void Start()
     {
         this.entityPlayer = InstantiatePlayer();
@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Triggers when another collider enters the collider of this object.
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<Encounter>() is Encounter)
@@ -46,6 +47,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Instantiates player.
+    /// </summary>
     private EntityPlayer InstantiatePlayer()
     {
         // Allows us to start the game from a scene not containing the singleton.
@@ -60,12 +64,18 @@ public class Player : MonoBehaviour
         return (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityPlayer));
     }
 
+    /// <summary>
+    /// Inits HUD.
+    /// </summary>
     private void InitHUD()
     {
         PlayerHUD playerHUD = (PlayerHUD)this.playerHUD.GetComponent(typeof(PlayerHUD));
         playerHUD.InitHUD(entityPlayer);
     }
 
+    /// <summary>
+    /// Updates HUD.
+    /// </summary>
     private void UpdateHUD()
     {
         PlayerHUD playerHUD = (PlayerHUD)this.playerHUD.GetComponent(typeof(PlayerHUD));

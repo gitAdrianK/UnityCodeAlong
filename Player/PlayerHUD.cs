@@ -16,12 +16,20 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private TMP_Text playerDefense;
     [SerializeField] private TMP_Text playerGold;
 
+    /// <summary>
+    /// Inits HUD.
+    /// </summary>
+    /// <param name="entityPlayer">The entity player.</param>
     public void InitHUD(EntityPlayer entityPlayer)
     {
         this.playerName.text = "Name: " + entityPlayer.Name;
         UpdateHUD(entityPlayer);
     }
 
+    /// <summary>
+    /// Updates HUD.
+    /// </summary>
+    /// <param name="entityPlayer">The entity player.</param>
     public void UpdateHUD(EntityPlayer entityPlayer)
     {
         this.playerLife.text = "Life: " + entityPlayer.CurrentLife + "/" + entityPlayer.MaxLife;

@@ -11,6 +11,7 @@ public class EncounterFight : Encounter
     // The enemies encountered in the fight.
     private LinkedList<Enemy> enemies;
 
+    // Start is called before the first frame update
     public new void Start()
     {
         base.Start();
@@ -37,6 +38,7 @@ public class EncounterFight : Encounter
         return (Enemy)ScriptableObject.CreateInstance(typeof(Hobo));
     }
 
+    // override encounter.HandleEncounter
     public override void HandleEncounter(EntityPlayer player)
     {
         // TODO: Fight UI
