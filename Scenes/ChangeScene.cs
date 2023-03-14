@@ -41,43 +41,6 @@ public class ChangeScene : MonoBehaviour
     }
 
     /// <summary>
-    /// Loads game with Pepe Maldini.
-    /// </summary>
-    public void LoadGameWithPepeMaldini()
-    {
-        InstantiatePlayerIfPossible("Pepe Maldini", 100, 10, 10, 0, null);
-        LoadScene(Scene.Game);
-    }
-
-    /// <summary>
-    /// Loads game with Zebra The Weebra.
-    /// </summary>
-    public void LoadGameWithZebraTheWeebra()
-    {
-        InstantiatePlayerIfPossible("Zebra The Weebra", 90, 5, 15, 50, null);
-        LoadScene(Scene.Game);
-    }
-
-    /// <summary>
-    /// Instantiates player if possible.
-    /// </summary>
-    /// <param name="name">The name.</param>
-    /// <param name="life">The life.</param>
-    /// <param name="attack">The attack.</param>
-    /// <param name="defense">The defense.</param>
-    /// <param name="gold">The gold.</param>
-    /// <param name="items">The items.</param>
-    private void InstantiatePlayerIfPossible(string name, int life, int attack, int defense, int gold, LinkedList<Item> items)
-    {
-        Singleton instance = Singleton.instance;
-        if (!instance.entityPlayer)
-        {
-            instance.entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityPlayer));
-        }
-        instance.entityPlayer.Initialize(name, life, attack, defense, gold, null);
-    }
-
-    /// <summary>
     /// Closes game.
     /// </summary>
     public void CloseGame()

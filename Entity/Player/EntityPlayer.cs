@@ -15,14 +15,6 @@ public class EntityPlayer : Entity
     public Dictionary<Item, int> Items { get => items; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="EntityPlayer"/> class.
-    /// </summary>
-    public EntityPlayer()
-    {
-        this.Initialize("Default Player", 100, 10, 10, 0, null);
-    }
-
-    /// <summary>
     /// Initializes the object with given values.
     /// </summary>
     /// <param name="name">The name.</param>

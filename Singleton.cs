@@ -22,7 +22,6 @@ public class Singleton : MonoBehaviour
         else
         {
             instance = this;
-            entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityPlayer));
             DontDestroyOnLoad(gameObject);
         }
     }

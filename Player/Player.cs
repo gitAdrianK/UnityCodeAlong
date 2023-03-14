@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
                 return instance.entityPlayer;
             }
         }
-        return (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityPlayer));
+        return (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityDefault));
     }
 
     /// <summary>
