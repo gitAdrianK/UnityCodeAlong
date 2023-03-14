@@ -8,12 +8,12 @@ using UnityEngine;
 /// <seealso cref="EntityPlayer" />
 public class EntityZebraTheWeebra : EntityPlayer
 {
-    private static string playerName = "Zebra The Weebra";
-    private static int playerLife = 90;
-    private static int playerAttack = 5;
-    private static int playerDefense = 15;
-    private static int playerGold = 322;
-    private static Dictionary<Item, int> playerItems = null;
+    public static string playerName = "Zebra The Weebra";
+    public static int playerLife = 90;
+    public static int playerAttack = 5;
+    public static int playerDefense = 15;
+    public static int playerGold = 322;
+    public static Dictionary<Item, int> playerItems = null;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EntityZebraTheWeebra"/> class.
