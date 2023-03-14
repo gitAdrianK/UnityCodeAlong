@@ -52,16 +52,13 @@ public class Player : MonoBehaviour
     /// </summary>
     private EntityPlayer InstantiatePlayer()
     {
-        // Allows us to start the game from a scene not containing the singleton.
-        if (Singleton.instance)
+        Singleton instance = Singleton.instance;
+        if (instance.entityPlayer)
         {
-            Singleton instance = Singleton.instance;
-            if (instance.entityPlayer)
-            {
-                return instance.entityPlayer;
-            }
+            return instance.entityPlayer;
         }
-        return (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityDefault));
+        instance.entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityDefault));
+        return instance.entityPlayer;
     }
 
     /// <summary>
