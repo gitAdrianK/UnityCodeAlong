@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Mainmenu/Mainmenu.unity
+    guid: 2c145a7d07ed55d49b31a3c9974ddf18
+  - enabled: 1
+    path: Assets/Options/Options.unity
+    guid: ad0ffcba798776f41907c034ee9eb81c
+  - enabled: 1
+    path: Assets/CharacterSelection/CharacterSelection.unity
+    guid: ca5341f97bba634438a75d1dbde65550
+  - enabled: 1
+    path: Assets/Game/Game.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/GameOver/GameOver.unity
+    guid: c16ed12b177206247992f059ffb56ebe
+  m_configObjects: {}
