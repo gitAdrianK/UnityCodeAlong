@@ -11,7 +11,6 @@ public class PlayerLoad : MonoBehaviour
     [SerializeField] private TMP_InputField customDefense;
     [SerializeField] private TMP_InputField customGold;
 
-
     /// <summary>
     /// Loads game with Pepe Maldini.
     /// </summary>
@@ -32,6 +31,9 @@ public class PlayerLoad : MonoBehaviour
         ChangeScene.LoadScene(ChangeScene.Scene.Game);
     }
 
+    /// <summary>
+    /// Loads game with custom player.
+    /// </summary>
     public void LoadGameWithCustomPlayer()
     {
         EntityPlayer entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityPlayer));
@@ -50,12 +52,7 @@ public class PlayerLoad : MonoBehaviour
     /// <summary>
     /// Instantiates player if possible.
     /// </summary>
-    /// <param name="name">The name.</param>
-    /// <param name="life">The life.</param>
-    /// <param name="attack">The attack.</param>
-    /// <param name="defense">The defense.</param>
-    /// <param name="gold">The gold.</param>
-    /// <param name="items">The items.</param>
+    /// <param name="entityPlayer">The entity player.</param>
     private void InstantiatePlayerIfPossible(EntityPlayer entityPlayer)
     {
         Singleton instance = Singleton.instance;
