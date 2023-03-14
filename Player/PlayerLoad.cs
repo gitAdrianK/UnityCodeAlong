@@ -40,7 +40,8 @@ public class PlayerLoad : MonoBehaviour
             int.Parse(customLife.text),
             int.Parse(customAttack.text),
             int.Parse(customDefense.text),
-            int.Parse(customGold.text), null
+            int.Parse(customGold.text),
+            null
             );
         InstantiatePlayerIfPossible(entityPlayer);
         ChangeScene.LoadScene(ChangeScene.Scene.Game);
