@@ -192,11 +192,11 @@ public class PlayerLoad : MonoBehaviour
     /// <param name="value">The value.</param>
     private void UpdateSkillpoints(int value)
     {
-        if (value <= 0)
+        if (value < 0)
         {
             skillpointsInt++;
         }
-        else
+        else if (value > 0)
         {
             skillpointsInt--;
         }
