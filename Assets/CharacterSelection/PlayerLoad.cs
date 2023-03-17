@@ -29,13 +29,13 @@ public class PlayerLoad : MonoBehaviour
         pepeMaldiniLife.text = "Life: " + EntityPepeMaldini.playerLife.ToString();
         pepeMaldiniAttack.text = "Attack: " + EntityPepeMaldini.playerAttack.ToString();
         pepeMaldiniDefense.text = "Defense: " + EntityPepeMaldini.playerDefense.ToString();
-        pepeMaldiniGold.text= "Gold: " + EntityPepeMaldini.playerGold.ToString();
+        pepeMaldiniGold.text = "Gold: " + EntityPepeMaldini.playerGold.ToString();
 
         zebraTheWeebraName.text = EntityZebraTheWeebra.playerName;
         zebraTheWeebraLife.text = "Life: " + EntityZebraTheWeebra.playerLife.ToString();
         zebraTheWeebraAttack.text = "Attack: " + EntityZebraTheWeebra.playerAttack.ToString();
         zebraTheWeebraDefense.text = "Defense: " + EntityZebraTheWeebra.playerDefense.ToString();
-        zebraTheWeebraGold.text= "Gold: " + EntityZebraTheWeebra.playerGold.ToString();
+        zebraTheWeebraGold.text = "Gold: " + EntityZebraTheWeebra.playerGold.ToString();
     }
 
     /// <summary>
@@ -63,6 +63,10 @@ public class PlayerLoad : MonoBehaviour
     /// </summary>
     public void LoadGameWithCustomPlayer()
     {
+        if (string.IsNullOrEmpty(customName.text))
+        {
+            return;
+        }
         EntityPlayer entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityPlayer));
         entityPlayer.Initialize(
             customName.text,
