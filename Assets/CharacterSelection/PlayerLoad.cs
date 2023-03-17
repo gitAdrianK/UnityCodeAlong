@@ -17,11 +17,18 @@ public class PlayerLoad : MonoBehaviour
     [SerializeField] private TMP_Text zebraTheWeebraDefense;
     [SerializeField] private TMP_Text zebraTheWeebraGold;
 
+    [SerializeField] private TMP_Text skillpoints;
     [SerializeField] private TMP_InputField customName;
     [SerializeField] private TMP_InputField customLife;
     [SerializeField] private TMP_InputField customAttack;
     [SerializeField] private TMP_InputField customDefense;
     [SerializeField] private TMP_InputField customGold;
+
+    private int skillpointsInt;
+    private int lifeInt;
+    private int attackInt;
+    private int defenseInt;
+    private int goldInt;
 
     public void Start()
     {
@@ -36,6 +43,14 @@ public class PlayerLoad : MonoBehaviour
         zebraTheWeebraAttack.text = "Attack: " + EntityZebraTheWeebra.playerAttack.ToString();
         zebraTheWeebraDefense.text = "Defense: " + EntityZebraTheWeebra.playerDefense.ToString();
         zebraTheWeebraGold.text = "Gold: " + EntityZebraTheWeebra.playerGold.ToString();
+
+        skillpointsInt = 15;
+        lifeInt = 0;
+        attackInt = 0;
+        defenseInt = 0;
+        goldInt = 0;
+
+        UpdateUI();
     }
 
     /// <summary>
@@ -63,21 +78,105 @@ public class PlayerLoad : MonoBehaviour
     /// </summary>
     public void LoadGameWithCustomPlayer()
     {
-        if (string.IsNullOrEmpty(customName.text))
+        if (skillpointsInt != 0 || string.IsNullOrEmpty(customName.text))
         {
             return;
         }
         EntityPlayer entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityPlayer));
         entityPlayer.Initialize(
             customName.text,
-            int.Parse(customLife.text),
-            int.Parse(customAttack.text),
-            int.Parse(customDefense.text),
-            int.Parse(customGold.text),
+            lifeInt,
+            attackInt,
+            defenseInt,
+            goldInt,
             null
             );
         InstantiatePlayerIfPossible(entityPlayer);
         ChangeScene.LoadScene(ChangeScene.Scene.Game);
+    }
+
+    public void ModifyLife(int value)
+    {
+        if (!CanModify(value, skillpointsInt, lifeInt))
+        {
+            return;
+        }
+        lifeInt += value;
+        UpdateSkillpoints(value);
+        UpdateUI();
+    }
+
+    public void ModifyAttack(int value)
+    {
+        if (!CanModify(value, skillpointsInt, attackInt))
+        {
+            return;
+        }
+        attackInt += value;
+        UpdateSkillpoints(value);
+        UpdateUI();
+    }
+
+    public void ModifyDefense(int value)
+    {
+        if (!CanModify(value, skillpointsInt, defenseInt))
+        {
+            return;
+        }
+        defenseInt += value;
+        UpdateSkillpoints(value);
+        UpdateUI();
+    }
+
+    public void ModifyGold(int value)
+    {
+        if (!CanModify(value, skillpointsInt, goldInt))
+        {
+            return;
+        }
+        goldInt += value;
+        UpdateSkillpoints(value);
+        UpdateUI();
+    }
+
+    private bool CanModify(int value, int skillpoints, int skillvalue)
+    {
+        if (value <= 0)
+        {
+            if (skillvalue <= 0)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if (skillpoints <= 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void UpdateSkillpoints(int value)
+    {
+        if (value <= 0)
+        {
+            skillpointsInt++;
+        }
+        else
+        {
+            skillpointsInt--;
+        }
+    }
+
+    private void UpdateUI()
+    {
+        skillpoints.text = skillpointsInt.ToString();
+        customLife.text = "Life " + lifeInt.ToString();
+        customAttack.text = "Attack " + attackInt.ToString();
+        customDefense.text = "Defense " + defenseInt.ToString();
+        customGold.text = "Gold " + goldInt.ToString();
     }
 
     /// <summary>
