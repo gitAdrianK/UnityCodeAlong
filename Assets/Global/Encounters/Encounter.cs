@@ -27,5 +27,5 @@ public abstract class Encounter : MonoBehaviour
     /// Handles the encounter with a player.
     /// </summary>
     /// <param name="player">The player having the encounter.</param>
-    public abstract void HandleEncounter(EntityPlayer player);
+    public abstract void HandleEncounter(Player player);
 }

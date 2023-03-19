@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     private EntityPlayer entityPlayer;
+    public EntityPlayer EntityPlayer { get => entityPlayer; }
+
     [SerializeField] private GameObject playerHUD;
 
     // Start is called before the first frame update
@@ -42,7 +44,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.GetComponent<Encounter>() is Encounter)
         {
             Encounter encounter = (Encounter)other.gameObject.GetComponent<Encounter>();
-            encounter.HandleEncounter(this.entityPlayer);
+            encounter.HandleEncounter(this);
             this.UpdateHUD();
         }
     }
@@ -73,7 +75,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Updates HUD.
     /// </summary>
-    private void UpdateHUD()
+    public void UpdateHUD()
     {
         PlayerHUD playerHUD = (PlayerHUD)this.playerHUD.GetComponent(typeof(PlayerHUD));
         playerHUD.UpdateHUD(entityPlayer);

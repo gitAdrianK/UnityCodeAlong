@@ -1,12 +1,9 @@
 fileFormatVersion: 2
-guid: 610cc0c3d2d171b43871ba838409a457
+guid: 0aaa2192053343848831195f2d2f1fa2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - fight: {instanceID: 0}
-  - chest: {instanceID: 0}
-  - merchant: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

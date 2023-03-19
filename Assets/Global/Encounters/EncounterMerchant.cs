@@ -19,7 +19,7 @@ public class EncounterMerchant : Encounter
     }
 
     // override encounter.HandleEncounter
-    public override void HandleEncounter(EntityPlayer player)
+    public override void HandleEncounter(Player player)
     {
         // TODO: Merchant UI
         // Time.timeScale = 0.0f;

@@ -39,7 +39,7 @@ public class EncounterFight : Encounter
     }
 
     // override encounter.HandleEncounter
-    public override void HandleEncounter(EntityPlayer player)
+    public override void HandleEncounter(Player player)
     {
         // TODO: Fight UI
         // Time.timeScale = 0.0f;

@@ -13,6 +13,8 @@ public class EncounterChest : Encounter
     // The item the chest contains.
     private Item item;
 
+    [SerializeField] private GameObject chestDialog;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -29,19 +31,11 @@ public class EncounterChest : Encounter
     }
 
     // override encounter.HandleEncounter
-    public override void HandleEncounter(EntityPlayer player)
+    public override void HandleEncounter(Player player)
     {
-        // TODO: Chest UI
-        // Time.timeScale = 0.0f;
-
-        // Adds gold or the item to the player.
-        if (item)
-        {
-            player.AddItem(item);
-        }
-        else
-        {
-            player.ChangeGoldBy(gold);
-        }
+        Singleton.instance.Pause();
+        GameObject obj = Instantiate(chestDialog, Vector2.zero, Quaternion.identity);
+        ChestDialog script = obj.GetComponent<ChestDialog>();
+        script.Initialize(obj, player, gold, item);
     }
 }
