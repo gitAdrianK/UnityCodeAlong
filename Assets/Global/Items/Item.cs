@@ -13,7 +13,7 @@ public abstract class Item : ScriptableObject
     /// Returns a random item.
     /// </brief>
     /// <returns>Item that was randomly generated</returns>
-    public static Item getRandomItem()
+    public static Item GetRandomItem()
     {
         switch (Random.Range(0, 2))
         {
