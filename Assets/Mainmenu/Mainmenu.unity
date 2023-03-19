@@ -1228,13 +1228,13 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
-    height: 1
+    width: 1920
+    height: 1080
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 450
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1522,6 +1522,14 @@ PrefabInstance:
     - target: {fileID: 1472950586380985342, guid: e97465f1fd870f14788c725ef17d7eae, type: 3}
       propertyPath: m_Name
       value: Sky
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473950207146627413, guid: e97465f1fd870f14788c725ef17d7eae, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473950207146627413, guid: e97465f1fd870f14788c725ef17d7eae, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e97465f1fd870f14788c725ef17d7eae, type: 3}

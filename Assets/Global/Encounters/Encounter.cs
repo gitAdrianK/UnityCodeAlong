@@ -14,7 +14,7 @@ public abstract class Encounter : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
-        this.movespeed = 5f;
+        this.movespeed = 250f;
     }
 
     // Update is called once per frame

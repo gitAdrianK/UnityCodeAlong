@@ -33,7 +33,7 @@ public class Spawner : MonoBehaviour
         chestCooldown = Random.Range(0, 1000);
         merchantCooldown = Random.Range(20_000, 25_000);
 
-        spawnPosition = new Vector3(12, -2, 90);
+        spawnPosition = new Vector3(1100, -50, 90);
     }
 
     // Update is called once per frame
