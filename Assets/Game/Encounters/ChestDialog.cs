@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ChestDialog : MonoBehaviour
+public class ChestDialog : Dialog
 {
-    private GameObject dialog;
-    private Player player;
     private int gold;
     private Item item;
 
@@ -42,12 +40,5 @@ public class ChestDialog : MonoBehaviour
     public void Leave()
     {
         CloseDialog();
-    }
-
-    private void CloseDialog()
-    {
-        player.UpdateHUD();
-        Singleton.instance.Resume();
-        Destroy(dialog);
     }
 }

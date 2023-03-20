@@ -11,6 +11,8 @@ public class EncounterFight : Encounter
     // The enemies encountered in the fight.
     private LinkedList<Enemy> enemies;
 
+    [SerializeField] private GameObject fightDialog;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -41,15 +43,9 @@ public class EncounterFight : Encounter
     // override encounter.HandleEncounter
     public override void HandleEncounter(Player player)
     {
-        // TODO: Fight UI
-        // Time.timeScale = 0.0f;
-
-        string log = "";
-        log += "[NYI] Fight with " + enemies.Count + " enemies!\n";
-        foreach (Enemy enemy in enemies)
-        {
-            log += enemy.Name + "\n";
-        }
-        Debug.Log(log);
+        Singleton.instance.Pause();
+        GameObject obj = Instantiate(fightDialog, Vector2.zero, Quaternion.identity);
+        FightDialog script = obj.GetComponent<FightDialog>();
+        script.Initialize(obj, player, enemies);
     }
 }
