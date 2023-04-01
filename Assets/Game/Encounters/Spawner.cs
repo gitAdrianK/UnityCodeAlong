@@ -39,7 +39,6 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Singleton.instance.isPaused);
         if (Singleton.instance.isPaused)
         {
             return;
