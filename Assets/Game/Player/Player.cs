@@ -45,7 +45,6 @@ public class Player : MonoBehaviour
         {
             Encounter encounter = (Encounter)other.gameObject.GetComponent<Encounter>();
             encounter.HandleEncounter(this);
-            this.UpdateHUD();
         }
     }
 

@@ -16,7 +16,7 @@ public abstract class Dialog : MonoBehaviour
         }
         else
         {
-            Debug.Log("Player was not set! Cannot update HUD!");
+            // Debug.Log("Player was not set! Cannot update HUD!");
         }
         if (dialog)
         {
@@ -24,7 +24,7 @@ public abstract class Dialog : MonoBehaviour
         }
         else
         {
-            Debug.Log("GameObject was not set! Cannot destroy!");
+            Debug.LogError("GameObject was not set! Cannot destroy!");
         }
     }
 }

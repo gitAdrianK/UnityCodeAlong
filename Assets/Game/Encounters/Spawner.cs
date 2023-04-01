@@ -9,17 +9,22 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     // Encounters.
-    public GameObject fight;
-    public GameObject chest;
-    public GameObject merchant;
+    [SerializeField] private GameObject fight;
+    [SerializeField] private GameObject chest;
+    [SerializeField] private GameObject merchant;
+
+    // The difficulty determining the amount of encounters between each merchant encounter.
+    private int difficulty;
+
+    // Encounters to choose in dialog and to spawn once chosen.
+    [SerializeField] private GameObject spawnerDialog;
+
+    private List<GameObject> toSpawnEncounters;
+    private int encounterCounter;
+    private int encounterCooldown;
 
     // Active game objects. Using an object pool instead of instantiating/destroying might be nice.
     private LinkedList<GameObject> activeGameObjects;
-
-    // Cooldowns.
-    private int fightCooldown;
-    private int chestCooldown;
-    private int merchantCooldown;
 
     // Position to spawn encounters at.
     private Vector3 spawnPosition;
@@ -27,11 +32,13 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        activeGameObjects = new LinkedList<GameObject>();
+        toSpawnEncounters = new List<GameObject>();
+        encounterCounter = 0;
+        encounterCooldown = 500;
 
-        fightCooldown = Random.Range(3000, 4000);
-        chestCooldown = Random.Range(0, 1000);
-        merchantCooldown = Random.Range(20_000, 25_000);
+        difficulty = 0;
+
+        activeGameObjects = new LinkedList<GameObject>();
 
         spawnPosition = new Vector3(1100, -50, 90);
     }
@@ -43,24 +50,23 @@ public class Spawner : MonoBehaviour
         {
             return;
         }
-        if (fightCooldown < 0)
+        if (toSpawnEncounters.Count >= encounterCounter)
         {
-            activeGameObjects.AddLast(Instantiate(fight, spawnPosition, Quaternion.identity));
-            fightCooldown = Random.Range(1000, 5000);
+            Singleton.instance.Pause();
+            GameObject obj = Instantiate(spawnerDialog, Vector2.zero, Quaternion.identity);
+            SpawnerDialog script = obj.GetComponent<SpawnerDialog>();
+            script.Initialize(obj);
+            Debug.Log("Encounter creation dialog here at difficulty: " + difficulty);
+            return;
         }
-        if (chestCooldown < 0)
+        if (encounterCooldown < 0)
         {
-            activeGameObjects.AddLast(Instantiate(chest, spawnPosition, Quaternion.identity));
-            chestCooldown = Random.Range(1000, 5000);
+            GameObject encounter = Instantiate(toSpawnEncounters[encounterCounter], spawnPosition, Quaternion.identity);
+            activeGameObjects.AddLast(encounter);
+            encounterCounter++;
+            encounterCooldown = 500;
         }
-        if (merchantCooldown < 0)
-        {
-            activeGameObjects.AddLast(Instantiate(merchant, spawnPosition, Quaternion.identity));
-            merchantCooldown = Random.Range(15_000, 20_000);
-        }
-        fightCooldown--;
-        chestCooldown--;
-        merchantCooldown--;
+        encounterCooldown--;
     }
 
     // Triggers when another collider exits the collider of this object.
