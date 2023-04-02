@@ -24,6 +24,7 @@ public class Icon : MonoBehaviour
     {
         Canvas.ForceUpdateCanvases();
         originPoint = transform.position;
+        slotPoint = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -58,11 +59,28 @@ public class Icon : MonoBehaviour
     private void OnMouseUp()
     {
         releasePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        endPoint = slotPoint == null ? slotPoint : originPoint;
+        // If we have collided with a slot use its position, otherwise go back to the origin.
+        endPoint = slotPoint != Vector3.zero ? slotPoint : originPoint;
         isDragging = false;
         isSnapping = true;
         progress = 0.0f;
     }
 
-    // TODO: Collision with slot set slotPosition
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag != "Slot")
+        {
+            return;
+        }
+        slotPoint = other.gameObject.transform.position;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag != "Slot")
+        {
+            return;
+        }
+        slotPoint = Vector3.zero;
+    }
 }
