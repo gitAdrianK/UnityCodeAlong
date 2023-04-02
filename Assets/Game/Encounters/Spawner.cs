@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
     // The difficulty determining the amount of encounters between each merchant encounter.
     private int difficulty;
 
-    // Encounters to choose in dialog and to spawn once chosen.
+    // Spawner dialog to choose a list of encounters and to spawn once chosen.
     [SerializeField] private GameObject spawnerDialog;
 
     private List<GameObject> toSpawnEncounters;
@@ -52,11 +52,10 @@ public class Spawner : MonoBehaviour
         }
         if (toSpawnEncounters.Count >= encounterCounter)
         {
-            Singleton.instance.Pause();
-            GameObject obj = Instantiate(spawnerDialog, Vector2.zero, Quaternion.identity);
-            SpawnerDialog script = obj.GetComponent<SpawnerDialog>();
-            script.Initialize(obj);
-            Debug.Log("Encounter creation dialog here at difficulty: " + difficulty);
+            //Singleton.instance.Pause();
+            //GameObject obj = Instantiate(spawnerDialog, Vector2.zero, Quaternion.identity);
+            //SpawnerDialog script = obj.GetComponent<SpawnerDialog>();
+            //script.Initialize(obj, difficulty, toSpawnEncounters);
             return;
         }
         if (encounterCooldown < 0)

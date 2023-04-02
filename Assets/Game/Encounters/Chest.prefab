@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2c1e100246023499dffbde89d01454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestDialog: {fileID: 6499520409405353089, guid: 330c58a7ae79364478aa357a038940e8, type: 3}
+  chestDialog: {fileID: 3114319670834521552, guid: 330c58a7ae79364478aa357a038940e8, type: 3}
 --- !u!50 &2575064087918035647
 Rigidbody2D:
   serializedVersion: 4

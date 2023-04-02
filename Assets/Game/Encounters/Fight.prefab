@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6b5f8d194974f48b3a5a71e5af5695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fightDialog: {fileID: 7967514432240820076, guid: 93610c646deb25243b0cf0f742cf2062, type: 3}
+  fightDialog: {fileID: 558423860142535972, guid: 93610c646deb25243b0cf0f742cf2062, type: 3}
 --- !u!50 &5035313758156138726
 Rigidbody2D:
   serializedVersion: 4
