@@ -18,9 +18,9 @@ public class Spawner : MonoBehaviour
 
     // Spawner dialog to choose a list of encounters and to spawn once chosen.
     [SerializeField] private GameObject spawnerDialog;
+    private BoolWrapper isCreating;
 
-    private List<GameObject> toSpawnEncounters;
-    private int encounterCounter;
+    private LinkedList<Encounter.Type> toSpawnEncounters;
     private int encounterCooldown;
 
     // Active game objects. Using an object pool instead of instantiating/destroying might be nice.
@@ -32,13 +32,13 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        toSpawnEncounters = new List<GameObject>();
-        encounterCounter = 0;
+        toSpawnEncounters = new LinkedList<Encounter.Type>();
         encounterCooldown = 500;
 
         difficulty = 0;
 
         activeGameObjects = new LinkedList<GameObject>();
+        isCreating = new BoolWrapper(false);
 
         spawnPosition = new Vector3(1100, -50, 90);
     }
@@ -46,24 +46,30 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Singleton.instance.isPaused)
+        if (Singleton.instance.isPaused || isCreating.Value)
         {
             return;
         }
-        if (toSpawnEncounters.Count >= encounterCounter)
+        if (toSpawnEncounters.Count == 0 && activeGameObjects.Count == 0)
         {
-            //Singleton.instance.Pause();
-            //GameObject obj = Instantiate(spawnerDialog, Vector2.zero, Quaternion.identity);
-            //SpawnerDialog script = obj.GetComponent<SpawnerDialog>();
-            //script.Initialize(obj, difficulty, toSpawnEncounters);
-            return;
-        }
-        if (encounterCooldown < 0)
-        {
-            GameObject encounter = Instantiate(toSpawnEncounters[encounterCounter], spawnPosition, Quaternion.identity);
-            activeGameObjects.AddLast(encounter);
-            encounterCounter++;
             encounterCooldown = 500;
+            isCreating.Value = true;
+            GameObject obj = Instantiate(spawnerDialog, Vector2.zero, Quaternion.identity);
+            SpawnerDialog script = obj.GetComponent<SpawnerDialog>();
+            script.Initialize(obj, difficulty, toSpawnEncounters, isCreating);
+            difficulty++;
+            return;
+        }
+        if (toSpawnEncounters.Count != 0 && encounterCooldown < 0)
+        {
+            GameObject encounter = Instantiate(
+                CreateGameObjectFromEncounterEnum(toSpawnEncounters.First.Value),
+                spawnPosition,
+                Quaternion.identity
+                );
+            toSpawnEncounters.RemoveFirst();
+            activeGameObjects.AddLast(encounter);
+            encounterCooldown = 2000;
         }
         encounterCooldown--;
     }
@@ -71,8 +77,27 @@ public class Spawner : MonoBehaviour
     // Triggers when another collider exits the collider of this object.
     void OnTriggerExit2D(Collider2D other)
     {
+        if (other.gameObject.tag != "Encounter")
+        {
+            return;
+        }
         GameObject gameObject = other.gameObject;
         activeGameObjects.Remove(gameObject);
         Destroy(gameObject);
+    }
+
+    GameObject CreateGameObjectFromEncounterEnum(Encounter.Type encounter)
+    {
+        switch (encounter)
+        {
+            case Encounter.Type.Fight:
+                return fight;
+            case Encounter.Type.Chest:
+                return chest;
+            case Encounter.Type.Merchant:
+                return merchant;
+            default:
+                return null;
+        }
     }
 }

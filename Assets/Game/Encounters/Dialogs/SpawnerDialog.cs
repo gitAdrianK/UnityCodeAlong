@@ -15,63 +15,94 @@ public class SpawnerDialog : Dialog
 
     // The slots gameobject internal slots are attached to.
     [SerializeField] private GameObject slots;
-    // A list containing those slots for easier access than getting the gameobjects children.
-    private List<GameObject> slotsList;
 
     // The encounters gameobject internal encounters are attached to.
-    [SerializeField] private GameObject encounters;
-    // A list containing those encounters for easier access than getting the gameobjects children.
-    private List<GameObject> encountersList;
+    [SerializeField] private GameObject icons;
 
     private int difficulty;
-    private List<GameObject> toSpawnEncounters;
+    private LinkedList<Encounter.Type> toSpawnEncounters;
 
-    public void Start()
-    {
-        slotsList = new List<GameObject>();
-        encountersList = new List<GameObject>();
-    }
+    private BoolWrapper isPaused;
 
-    public void Initialize(GameObject dialog, int difficulty, List<GameObject> toSpawnEncounters)
+    public void Initialize(GameObject dialog, int difficulty, LinkedList<Encounter.Type> toSpawnEncounters, BoolWrapper isPaused)
     {
         this.dialog = dialog;
         this.difficulty = difficulty;
         this.toSpawnEncounters = toSpawnEncounters;
-
-        // TODO: Instantiate slots and encounters.
+        this.isPaused = isPaused;
 
         // Add the player icon first.
-        // TODO: Instantiate the player icon. Do we need this? Can we do it in the editor?
-        // child.transform.parent = slots.transform;
-        // this.slotsList.Add();
+        // Create.
+        GameObject playerSlot = Instantiate(iconSlot, Vector2.zero, Quaternion.identity);
+        GameObject playerIcon = Instantiate(iconPlayer, Vector2.zero, Quaternion.identity);
+        // Assign parent.
+        playerSlot.transform.SetParent(slots.transform);
+        playerIcon.transform.SetParent(icons.transform);
 
         int count = difficulty + 3 < 6 ? difficulty + 3 : 6;
         for (int i = 0; i < count; i++)
         {
-            // TODO: Create a slot and an encounter gameobject.
+            GameObject encounterSlot = Instantiate(iconSlot, Vector2.zero, Quaternion.identity);
+            GameObject encounterIcon = null;
+            switch (Random.Range(0, 2))
+            {
+                case 0:
+                    encounterIcon = Instantiate(iconChest, Vector2.zero, Quaternion.identity);
+                    break;
+                case 1:
+                    encounterIcon = Instantiate(iconFight, Vector2.zero, Quaternion.identity);
+                    break;
+                default: /* do nothing, or throw some unreachble exception */ break;
+            }
 
-            // slot.transform.parent = slots.transform;
-            // this.slotsList.Add(slot);
-
-            // encounter.transform.parent = encounters.transform;
-            // this.encountersList.Add(encounter);
-
-            Debug.Log("Element added here");
+            encounterSlot.transform.SetParent(slots.transform);
+            encounterIcon.transform.SetParent(icons.transform);
         }
 
         // Add the merchant icon last.
-        // TODO: Instantiate the merchant icon. Do we need this? Can we do it in the editor?
-        // child.transform.parent = slots.transform;
-        // this.slotsList.Add();
+        GameObject merchantSlot = Instantiate(iconSlot, Vector2.zero, Quaternion.identity);
+        GameObject merchantIcon = Instantiate(iconMerchant, Vector2.zero, Quaternion.identity);
+
+        merchantSlot.transform.SetParent(slots.transform);
+        merchantIcon.transform.SetParent(icons.transform);
+
+        Canvas.ForceUpdateCanvases();
+        playerIcon.transform.position = playerSlot.transform.position;
+        merchantIcon.transform.position = merchantSlot.transform.position;
+
+        Slot playerScript = playerSlot.GetComponent<Slot>();
+        Slot merchantScript = merchantSlot.GetComponent<Slot>();
+
+        playerScript.Icon = playerIcon;
+        merchantScript.Icon = merchantIcon;
     }
 
     public void Finished()
     {
-        foreach (GameObject obj in slotsList)
+        toSpawnEncounters.Clear();
+        for (int i = 1; i < slots.transform.childCount; i++)
         {
-            // TODO: Fill list with encounters.
-            Debug.Log("Contained encounter");
+            Transform child = slots.transform.GetChild(i);
+            Slot script = child.GetComponent<Slot>();
+            if (!script.Icon)
+            {
+                return;
+            }
+            // XXX: Super shady. Don't want to use Contains!
+            if (script.Icon.name.Contains("Chest"))
+            {
+                toSpawnEncounters.AddLast(Encounter.Type.Chest);
+            }
+            else if (script.Icon.name.Contains("Fight"))
+            {
+                toSpawnEncounters.AddLast(Encounter.Type.Fight);
+            }
+            else if (script.Icon.name.Contains("Merchant"))
+            {
+                toSpawnEncounters.AddLast(Encounter.Type.Merchant);
+            }
         }
+        isPaused.Value = false;
         CloseDialog();
     }
 }

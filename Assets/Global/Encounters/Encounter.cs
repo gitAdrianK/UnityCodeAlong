@@ -8,6 +8,16 @@ using UnityEngine;
 /// <seealso cref="MonoBehaviour" />
 public abstract class Encounter : MonoBehaviour
 {
+    /// <summary>
+    /// Encounters of the game.
+    /// </summary>
+    public enum Type
+    {
+        Fight,
+        Chest,
+        Merchant,
+    }
+
     // The movespeed. How quickly the encounter moves across the screen.
     private float movespeed;
 

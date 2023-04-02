@@ -68,19 +68,35 @@ public class Icon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Collision is not a slot.
         if (other.gameObject.tag != "Slot")
         {
             return;
         }
+        Slot script = other.GetComponent<Slot>();
+        // Slot already has an icon.
+        if (script.Icon)
+        {
+            return;
+        }
+        script.Icon = this.gameObject;
         slotPoint = other.gameObject.transform.position;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        // Exit is not a slot.
         if (other.gameObject.tag != "Slot")
         {
             return;
         }
+        Slot script = other.GetComponent<Slot>();
+        // The exit is not the to the slot assigned icon.
+        if (script.Icon != this.gameObject)
+        {
+            return;
+        }
+        script.Icon = null;
         slotPoint = Vector3.zero;
     }
 }

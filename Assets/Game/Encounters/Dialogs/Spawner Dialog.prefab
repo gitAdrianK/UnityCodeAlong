@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5383378802097820306}
   - component: {fileID: 3188615384797973626}
   m_Layer: 5
-  m_Name: Encounters
+  m_Name: Icons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,13 +244,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72693109a23b969428fbcb75feac1885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconSlot: {fileID: 288518474851764189, guid: 66534c16c9640174ba3d9ab31bf16f74, type: 3}
-  iconPlayer: {fileID: 8401941351185443047, guid: 93306e65825dcf24ca5432d0cd0a416f, type: 3}
-  iconChest: {fileID: 0}
-  iconFight: {fileID: 0}
-  iconMerchant: {fileID: 0}
+  iconSlot: {fileID: 4180397145906503022, guid: 66534c16c9640174ba3d9ab31bf16f74, type: 3}
+  iconPlayer: {fileID: 824579249211211404, guid: 93306e65825dcf24ca5432d0cd0a416f, type: 3}
+  iconChest: {fileID: 824579249211211404, guid: 0e07024aec0e0714487b2cfbc1414094, type: 3}
+  iconFight: {fileID: 824579249211211404, guid: 3042c8e8f3de0144e90f44985dbf3321, type: 3}
+  iconMerchant: {fileID: 824579249211211404, guid: e14354b1a930313489ce27863ab9f235, type: 3}
   slots: {fileID: 5383378803529406309}
-  encounters: {fileID: 5383378802097820309}
+  icons: {fileID: 5383378802097820309}
 --- !u!1 &5383378803173879955
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +410,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5383378803529406309}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

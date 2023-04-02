@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8364585322296795262}
   m_Layer: 0
   m_Name: Fight
-  m_TagString: Untagged
+  m_TagString: Encounter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
