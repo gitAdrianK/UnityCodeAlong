@@ -18,6 +18,7 @@ public class Icon : MonoBehaviour
     private float progress;
     private Vector3 releasePoint;
     private Vector3 endPoint;
+    private float size;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +26,21 @@ public class Icon : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         originPoint = transform.position;
         slotPoint = Vector3.zero;
+        size = GetComponent<Renderer>().bounds.size.x;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Unitys mouse up and down is scuffed so we have to check ourselves
+        if (Input.GetMouseButtonDown(0) && Vector3.Distance(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)) <= size / 2)
+        {
+            MouseDown();
+        }
+        if (Input.GetMouseButtonUp(0) && Vector3.Distance(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)) <= size / 2)
+        {
+            MouseUp();
+        }
         if (isDragging)
         {
             transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
@@ -47,16 +58,14 @@ public class Icon : MonoBehaviour
         }
     }
 
-    // Called when the mouse is clicked on a gameobject with this script
-    private void OnMouseDown()
+    private void MouseDown()
     {
         offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
         isDragging = true;
         isSnapping = false;
     }
 
-    // Called when the mouse is released on a gameobject with this script
-    private void OnMouseUp()
+    private void MouseUp()
     {
         releasePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // If we have collided with a slot use its position, otherwise go back to the origin.
@@ -65,6 +74,25 @@ public class Icon : MonoBehaviour
         isSnapping = true;
         progress = 0.0f;
     }
+
+    // // Called when the mouse is clicked on a gameobject with this script
+    // private void OnMouseDown()
+    // {
+    //     offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //     isDragging = true;
+    //     isSnapping = false;
+    // }
+
+    // // Called when the mouse is released on a gameobject with this script
+    // private void OnMouseUp()
+    // {
+    //     releasePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //     // If we have collided with a slot use its position, otherwise go back to the origin.
+    //     endPoint = slotPoint != Vector3.zero ? slotPoint : originPoint;
+    //     isDragging = false;
+    //     isSnapping = true;
+    //     progress = 0.0f;
+    // }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
