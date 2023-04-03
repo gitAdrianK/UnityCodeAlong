@@ -26,7 +26,7 @@ public class SpawnerDialog : Dialog
     private int difficulty;
     private LinkedList<Encounter.Type> toSpawnEncounters;
 
-    private BoolWrapper isPaused;
+    private BoolWrapper isCreating;
 
     /// <summary>
     /// Initialize.
@@ -34,13 +34,13 @@ public class SpawnerDialog : Dialog
     /// <param name="dialog">The dialog.</param>
     /// <param name="difficulty">The difficulty.</param>
     /// <param name="toSpawnEncounters">The to spawn encounters.</param>
-    /// <param name="isPaused">The is paused.</param>
-    public void Initialize(GameObject dialog, int difficulty, LinkedList<Encounter.Type> toSpawnEncounters, BoolWrapper isPaused)
+    /// <param name="isCreating">The is paused.</param>
+    public void Initialize(GameObject dialog, int difficulty, LinkedList<Encounter.Type> toSpawnEncounters, BoolWrapper isCreating)
     {
         this.dialog = dialog;
         this.difficulty = difficulty;
         this.toSpawnEncounters = toSpawnEncounters;
-        this.isPaused = isPaused;
+        this.isCreating = isCreating;
 
         // Add the player icon first.
         // Create.
@@ -117,7 +117,7 @@ public class SpawnerDialog : Dialog
                 toSpawnEncounters.AddLast(Encounter.Type.Merchant);
             }
         }
-        isPaused = false;
+        isCreating.SetFalse();
         CloseDialog();
     }
 }

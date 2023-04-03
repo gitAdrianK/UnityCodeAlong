@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour
         difficulty = 0;
 
         activeGameObjects = new LinkedList<GameObject>();
-        isCreating = false;
+        isCreating = new BoolWrapper(false);
 
         spawnPosition = new Vector3(1100, -50, 90);
     }
@@ -53,7 +53,7 @@ public class Spawner : MonoBehaviour
         if (toSpawnEncounters.Count == 0 && activeGameObjects.Count == 0)
         {
             encounterCooldown = 500;
-            isCreating = true;
+            isCreating.SetTrue();
             GameObject obj = Instantiate(spawnerDialog, Vector2.zero, Quaternion.identity);
             SpawnerDialog script = obj.GetComponent<SpawnerDialog>();
             script.Initialize(obj, difficulty, toSpawnEncounters, isCreating);
