@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Chest dialog.
+/// </summary>
+/// <seealso cref="Dialog" />
 public class ChestDialog : Dialog
 {
     private int gold;
@@ -10,6 +14,13 @@ public class ChestDialog : Dialog
 
     [SerializeField] private TMP_Text contents;
 
+    /// <summary>
+    /// Initialize.
+    /// </summary>
+    /// <param name="dialog">The dialog.</param>
+    /// <param name="player">The player.</param>
+    /// <param name="gold">The gold.</param>
+    /// <param name="item">The item.</param>
     public void Initialize(GameObject dialog, Player player, int gold, Item item)
     {
         this.dialog = dialog;
@@ -29,6 +40,9 @@ public class ChestDialog : Dialog
         this.contents.text = contents;
     }
 
+    /// <summary>
+    /// Take.
+    /// </summary>
     public void Take()
     {
         EntityPlayer entityPlayer = player.EntityPlayer;
@@ -37,6 +51,9 @@ public class ChestDialog : Dialog
         CloseDialog();
     }
 
+    /// <summary>
+    /// Leave.
+    /// </summary>
     public void Leave()
     {
         CloseDialog();

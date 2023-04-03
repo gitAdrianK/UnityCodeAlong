@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour
         difficulty = 0;
 
         activeGameObjects = new LinkedList<GameObject>();
-        isCreating = new BoolWrapper(false);
+        isCreating = false;
 
         spawnPosition = new Vector3(1100, -50, 90);
     }
@@ -46,14 +46,14 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Singleton.instance.isPaused || isCreating.Value)
+        if (Singleton.instance.isPaused || isCreating)
         {
             return;
         }
         if (toSpawnEncounters.Count == 0 && activeGameObjects.Count == 0)
         {
             encounterCooldown = 500;
-            isCreating.Value = true;
+            isCreating = true;
             GameObject obj = Instantiate(spawnerDialog, Vector2.zero, Quaternion.identity);
             SpawnerDialog script = obj.GetComponent<SpawnerDialog>();
             script.Initialize(obj, difficulty, toSpawnEncounters, isCreating);
@@ -86,6 +86,10 @@ public class Spawner : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Creates game object from encounter enum.
+    /// </summary>
+    /// <param name="encounter">The encounter.</param>
     GameObject CreateGameObjectFromEncounterEnum(Encounter.Type encounter)
     {
         switch (encounter)

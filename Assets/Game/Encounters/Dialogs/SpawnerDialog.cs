@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Spawner dialog.
+/// </summary>
+/// <seealso cref="Dialog" />
 public class SpawnerDialog : Dialog
 {
     // Slot icon
@@ -24,6 +28,13 @@ public class SpawnerDialog : Dialog
 
     private BoolWrapper isPaused;
 
+    /// <summary>
+    /// Initialize.
+    /// </summary>
+    /// <param name="dialog">The dialog.</param>
+    /// <param name="difficulty">The difficulty.</param>
+    /// <param name="toSpawnEncounters">The to spawn encounters.</param>
+    /// <param name="isPaused">The is paused.</param>
     public void Initialize(GameObject dialog, int difficulty, LinkedList<Encounter.Type> toSpawnEncounters, BoolWrapper isPaused)
     {
         this.dialog = dialog;
@@ -66,6 +77,7 @@ public class SpawnerDialog : Dialog
         merchantSlot.transform.SetParent(slots.transform);
         merchantIcon.transform.SetParent(icons.transform);
 
+        // Move the player and merchant icons to the first and last slot and associate them with those slots.
         Canvas.ForceUpdateCanvases();
         playerIcon.transform.position = playerSlot.transform.position;
         merchantIcon.transform.position = merchantSlot.transform.position;
@@ -77,6 +89,9 @@ public class SpawnerDialog : Dialog
         merchantScript.Icon = merchantIcon;
     }
 
+    /// <summary>
+    /// Finished.
+    /// </summary>
     public void Finished()
     {
         toSpawnEncounters.Clear();
@@ -102,7 +117,7 @@ public class SpawnerDialog : Dialog
                 toSpawnEncounters.AddLast(Encounter.Type.Merchant);
             }
         }
-        isPaused.Value = false;
+        isPaused = false;
         CloseDialog();
     }
 }

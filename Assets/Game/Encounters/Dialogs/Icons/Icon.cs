@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Icon.
+/// </summary>
+/// <seealso cref="MonoBehaviour" />
 public class Icon : MonoBehaviour
 {
     // Positions snapped to.
@@ -33,11 +37,12 @@ public class Icon : MonoBehaviour
     void Update()
     {
         // Unitys mouse up and down is scuffed so we have to check ourselves
-        if (Input.GetMouseButtonDown(0) && Vector3.Distance(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)) <= size / 2)
+        float distance = Vector2.Distance(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        if (Input.GetMouseButtonDown(0) && distance <= size / 2)
         {
             MouseDown();
         }
-        if (Input.GetMouseButtonUp(0) && Vector3.Distance(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)) <= size / 2)
+        if (Input.GetMouseButtonUp(0) && distance <= size / 2)
         {
             MouseUp();
         }
@@ -58,6 +63,11 @@ public class Icon : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when an icon is clicked and sets up the logic for dragging this icon with the mouse and it snapping.
+    /// This should be done in OnMouseDown however Unity is very unreliable when it comes to detecting
+    /// if the mouse has been clicked on a GameObject.
+    /// </summary>
     private void MouseDown()
     {
         offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -65,6 +75,11 @@ public class Icon : MonoBehaviour
         isSnapping = false;
     }
 
+    /// <summary>
+    /// Called when an icon is released and sets up the logic for dragging this icon with the mouse and it snapping.
+    /// This should be done in OnMouseUp however Unity is very unreliable when it comes to detecting
+    /// if the mouse has been clicked on a GameObject.
+    /// </summary>
     private void MouseUp()
     {
         releasePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -75,25 +90,7 @@ public class Icon : MonoBehaviour
         progress = 0.0f;
     }
 
-    // // Called when the mouse is clicked on a gameobject with this script
-    // private void OnMouseDown()
-    // {
-    //     offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //     isDragging = true;
-    //     isSnapping = false;
-    // }
-
-    // // Called when the mouse is released on a gameobject with this script
-    // private void OnMouseUp()
-    // {
-    //     releasePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //     // If we have collided with a slot use its position, otherwise go back to the origin.
-    //     endPoint = slotPoint != Vector3.zero ? slotPoint : originPoint;
-    //     isDragging = false;
-    //     isSnapping = true;
-    //     progress = 0.0f;
-    // }
-
+    // When this collides with another collider.
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Collision is not a slot.
@@ -111,6 +108,7 @@ public class Icon : MonoBehaviour
         slotPoint = other.gameObject.transform.position;
     }
 
+    // When this stops colliding with another collider.
     private void OnTriggerExit2D(Collider2D other)
     {
         // Exit is not a slot.
