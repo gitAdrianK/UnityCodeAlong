@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 746176268}
   - component: {fileID: 746176270}
   - component: {fileID: 746176273}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spawner
   m_TagString: Spawner
   m_Icon: {fileID: 0}

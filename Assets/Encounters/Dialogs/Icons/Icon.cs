@@ -36,16 +36,6 @@ public class Icon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Unitys mouse up and down is scuffed so we have to check ourselves
-        float distance = Vector2.Distance(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        if (Input.GetMouseButtonDown(0) && distance <= size / 2)
-        {
-            MouseDown();
-        }
-        if (Input.GetMouseButtonUp(0) && distance <= size / 2)
-        {
-            MouseUp();
-        }
         if (isDragging)
         {
             transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
@@ -65,10 +55,8 @@ public class Icon : MonoBehaviour
 
     /// <summary>
     /// Called when an icon is clicked and sets up the logic for dragging this icon with the mouse and it snapping.
-    /// This should be done in OnMouseDown however Unity is very unreliable when it comes to detecting
-    /// if the mouse has been clicked on a GameObject.
     /// </summary>
-    private void MouseDown()
+    private void OnMouseDown()
     {
         offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
         isDragging = true;
@@ -77,10 +65,8 @@ public class Icon : MonoBehaviour
 
     /// <summary>
     /// Called when an icon is released and sets up the logic for dragging this icon with the mouse and it snapping.
-    /// This should be done in OnMouseUp however Unity is very unreliable when it comes to detecting
-    /// if the mouse has been clicked on a GameObject.
     /// </summary>
-    private void MouseUp()
+    private void OnMouseUp()
     {
         releasePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // If we have collided with a slot use its position, otherwise go back to the origin.
