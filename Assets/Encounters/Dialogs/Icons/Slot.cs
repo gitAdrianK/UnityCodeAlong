@@ -8,6 +8,28 @@ using UnityEngine;
 /// <seealso cref="MonoBehaviour" />
 public class Slot : MonoBehaviour
 {
+    private static Color DEFAULT_COLOUR = new Color(0.2358491f, 0.2358491f, 0.2358491f);
+    private static Color OCCUPIED_COLOUR = new Color(0.4313726f, 0.8862746f, 0.3568628f);
+
     // The icon that is associated with this slot
-    public GameObject Icon { get; set; }
+    private GameObject icon;
+
+    public GameObject Icon { get => icon; }
+
+    public bool HasIcon()
+    {
+        return Icon == null;
+    }
+
+    public void AddGameObject(GameObject obj)
+    {
+        icon = obj;
+        GetComponent<SpriteRenderer>().color = OCCUPIED_COLOUR;
+    }
+
+    public void RemoveGameObject()
+    {
+        icon = null;
+        GetComponent<SpriteRenderer>().color = DEFAULT_COLOUR;
+    }
 }

@@ -85,8 +85,8 @@ public class SpawnerDialog : Dialog
         Slot playerScript = playerSlot.GetComponent<Slot>();
         Slot merchantScript = merchantSlot.GetComponent<Slot>();
 
-        playerScript.Icon = playerIcon;
-        merchantScript.Icon = merchantIcon;
+        playerScript.AddGameObject(playerIcon);
+        merchantScript.AddGameObject(merchantIcon);
     }
 
     /// <summary>

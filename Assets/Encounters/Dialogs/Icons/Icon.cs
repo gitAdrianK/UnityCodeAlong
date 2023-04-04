@@ -90,7 +90,7 @@ public class Icon : MonoBehaviour
         {
             return;
         }
-        script.Icon = this.gameObject;
+        script.AddGameObject(this.gameObject);
         slotPoint = other.gameObject.transform.position;
     }
 
@@ -108,7 +108,7 @@ public class Icon : MonoBehaviour
         {
             return;
         }
-        script.Icon = null;
+        script.RemoveGameObject();
         slotPoint = Vector3.zero;
     }
 }
