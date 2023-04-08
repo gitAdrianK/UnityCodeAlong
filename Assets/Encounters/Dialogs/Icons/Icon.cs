@@ -22,7 +22,6 @@ public class Icon : MonoBehaviour
     private float progress;
     private Vector3 releasePoint;
     private Vector3 endPoint;
-    private float size;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +29,6 @@ public class Icon : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         originPoint = transform.position;
         slotPoint = Vector3.zero;
-        size = GetComponent<Renderer>().bounds.size.x;
     }
 
     // Update is called once per frame
@@ -46,7 +44,7 @@ public class Icon : MonoBehaviour
             progress += 3.0f * Time.deltaTime;
             if (progress >= 1.0f)
             {
-                progress = Math.Clamp(progress, 0.0f, 1.0f);
+                progress = 1.0f;
                 isSnapping = false;
             }
             transform.position = Vector3.Lerp(releasePoint, endPoint, progress);

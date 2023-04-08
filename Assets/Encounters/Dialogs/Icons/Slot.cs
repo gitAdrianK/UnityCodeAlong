@@ -16,17 +16,19 @@ public class Slot : MonoBehaviour
 
     public GameObject Icon { get => icon; }
 
-    public bool HasIcon()
-    {
-        return Icon == null;
-    }
-
+    /// <summary>
+    /// Adds game object from the slot.
+    /// </summary>
+    /// <param name="obj">The game object.</param>
     public void AddGameObject(GameObject obj)
     {
         icon = obj;
         GetComponent<SpriteRenderer>().color = OCCUPIED_COLOUR;
     }
 
+    /// <summary>
+    /// Removes game object from the slot.
+    /// </summary>
     public void RemoveGameObject()
     {
         icon = null;
