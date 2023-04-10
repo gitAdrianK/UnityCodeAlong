@@ -10,6 +10,7 @@ using UnityEngine;
 public class Icon : MonoBehaviour
 {
     [SerializeField] private Types.Encounter type;
+    public Types.Encounter Type { get => type; }
 
     // Positions snapped to.
     private Vector3 originPoint;

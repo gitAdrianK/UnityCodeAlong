@@ -97,17 +97,18 @@ public class SpawnerDialog : Dialog
         toSpawnEncounters.Clear();
         for (int i = 1; i < slots.transform.childCount - 1; i++)
         {
-            Transform child = slots.transform.GetChild(i);
-            Slot script = child.GetComponent<Slot>();
-            if (!script.Icon)
+            GameObject child = slots.transform.GetChild(i).gameObject;
+            Slot slot = child.GetComponent<Slot>();
+            Icon icon = slot.Icon.GetComponent<Icon>();
+            if (!slot.Icon)
             {
                 return;
             }
-            if (script.Icon.type == Types.Encounter.Chest)
+            if (icon.Type == Types.Encounter.Chest)
             {
                 toSpawnEncounters.AddLast(Types.Encounter.Chest);
             }
-            else if (script.Icon.type == Types.Encounter.Fight)
+            else if (icon.Type == Types.Encounter.Fight)
             {
                 toSpawnEncounters.AddLast(Types.Encounter.Fight);
             }
