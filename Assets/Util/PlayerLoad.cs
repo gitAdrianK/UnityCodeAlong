@@ -63,8 +63,7 @@ public class PlayerLoad : MonoBehaviour
     /// </summary>
     public void LoadGameWithPepeMaldini()
     {
-        EntityPlayer entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityPepeMaldini));
-        InstantiatePlayerIfPossible(entityPlayer);
+        Singleton.instance.entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityPepeMaldini));
         ChangeScene.LoadScene(ChangeScene.Scene.Game);
     }
 
@@ -73,8 +72,7 @@ public class PlayerLoad : MonoBehaviour
     /// </summary>
     public void LoadGameWithZebraTheWeebra()
     {
-        EntityPlayer entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityZebraTheWeebra));
-        InstantiatePlayerIfPossible(entityPlayer);
+        Singleton.instance.entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityZebraTheWeebra));
         ChangeScene.LoadScene(ChangeScene.Scene.Game);
     }
 
@@ -87,8 +85,7 @@ public class PlayerLoad : MonoBehaviour
         {
             return;
         }
-        EntityPlayer entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityPlayer));
-        entityPlayer.Initialize(
+        Singleton.instance.entityPlayer.Initialize(
             customName.text,
             lifeInt,
             attackInt,
@@ -96,7 +93,6 @@ public class PlayerLoad : MonoBehaviour
             goldInt,
             null
             );
-        InstantiatePlayerIfPossible(entityPlayer);
         ChangeScene.LoadScene(ChangeScene.Scene.Game);
     }
 
@@ -212,19 +208,5 @@ public class PlayerLoad : MonoBehaviour
         customAttack.text = "Attack: " + attackInt.ToString();
         customDefense.text = "Defense: " + defenseInt.ToString();
         customGold.text = "Gold: " + goldInt.ToString();
-    }
-
-    /// <summary>
-    /// Instantiates player if possible.
-    /// </summary>
-    /// <param name="entityPlayer">The entity player.</param>
-    private void InstantiatePlayerIfPossible(EntityPlayer entityPlayer)
-    {
-        Singleton instance = Singleton.instance;
-        if (!instance)
-        {
-            return;
-        }
-        instance.entityPlayer = entityPlayer;
     }
 }

@@ -23,6 +23,10 @@ public class Singleton : MonoBehaviour
         else
         {
             instance = this;
+
+            entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityDefault));
+            isPaused = false;
+
             DontDestroyOnLoad(gameObject);
         }
     }

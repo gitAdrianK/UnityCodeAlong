@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        this.entityPlayer = InstantiatePlayer();
+        this.entityPlayer = Singleton.instance.entityPlayer;
         this.InitHUD();
     }
 
@@ -46,20 +46,6 @@ public class Player : MonoBehaviour
             Encounter encounter = (Encounter)other.gameObject.GetComponent<Encounter>();
             encounter.HandleEncounter(this);
         }
-    }
-
-    /// <summary>
-    /// Instantiates player.
-    /// </summary>
-    private EntityPlayer InstantiatePlayer()
-    {
-        Singleton instance = Singleton.instance;
-        if (instance.entityPlayer)
-        {
-            return instance.entityPlayer;
-        }
-        instance.entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityDefault));
-        return instance.entityPlayer;
     }
 
     /// <summary>
