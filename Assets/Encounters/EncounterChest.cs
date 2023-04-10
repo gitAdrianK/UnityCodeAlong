@@ -19,6 +19,7 @@ public class EncounterChest : Encounter
     public override void Start()
     {
         base.Start();
+        type = Types.Encounter.Chest;
         // Chance to be a gold chest, item chest otherwise.
         if (Random.Range(0, 11) <= 8)
         {

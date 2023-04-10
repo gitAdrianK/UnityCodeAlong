@@ -24,7 +24,7 @@ public class SpawnerDialog : Dialog
     [SerializeField] private GameObject icons;
 
     private int difficulty;
-    private LinkedList<Encounter.Type> toSpawnEncounters;
+    private LinkedList<Types.Encounter> toSpawnEncounters;
 
     private BoolWrapper isCreating;
 
@@ -35,7 +35,7 @@ public class SpawnerDialog : Dialog
     /// <param name="difficulty">The difficulty.</param>
     /// <param name="toSpawnEncounters">The to spawn encounters.</param>
     /// <param name="isCreating">The is paused.</param>
-    public void Initialize(GameObject dialog, int difficulty, LinkedList<Encounter.Type> toSpawnEncounters, BoolWrapper isCreating)
+    public void Initialize(GameObject dialog, int difficulty, LinkedList<Types.Encounter> toSpawnEncounters, BoolWrapper isCreating)
     {
         this.dialog = dialog;
         this.difficulty = difficulty;
@@ -95,7 +95,7 @@ public class SpawnerDialog : Dialog
     public void Finished()
     {
         toSpawnEncounters.Clear();
-        for (int i = 1; i < slots.transform.childCount; i++)
+        for (int i = 1; i < slots.transform.childCount - 1; i++)
         {
             Transform child = slots.transform.GetChild(i);
             Slot script = child.GetComponent<Slot>();
@@ -103,20 +103,16 @@ public class SpawnerDialog : Dialog
             {
                 return;
             }
-            // XXX: Super shady. Don't want to use Contains!
-            if (script.Icon.name.Contains("Chest"))
+            if (script.Icon.type == Types.Encounter.Chest)
             {
-                toSpawnEncounters.AddLast(Encounter.Type.Chest);
+                toSpawnEncounters.AddLast(Types.Encounter.Chest);
             }
-            else if (script.Icon.name.Contains("Fight"))
+            else if (script.Icon.type == Types.Encounter.Fight)
             {
-                toSpawnEncounters.AddLast(Encounter.Type.Fight);
-            }
-            else if (script.Icon.name.Contains("Merchant"))
-            {
-                toSpawnEncounters.AddLast(Encounter.Type.Merchant);
+                toSpawnEncounters.AddLast(Types.Encounter.Fight);
             }
         }
+        toSpawnEncounters.AddLast(Types.Encounter.Merchant);
         isCreating.SetFalse();
         CloseDialog();
     }

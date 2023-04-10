@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject spawnerDialog;
     private BoolWrapper isCreating;
 
-    private LinkedList<Encounter.Type> toSpawnEncounters;
+    private LinkedList<Types.Encounter> toSpawnEncounters;
     private int encounterCooldown;
 
     // Active game objects. Using an object pool instead of instantiating/destroying might be nice.
@@ -32,7 +32,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        toSpawnEncounters = new LinkedList<Encounter.Type>();
+        toSpawnEncounters = new LinkedList<Types.Encounter>();
         encounterCooldown = 500;
 
         difficulty = 0;
@@ -90,15 +90,15 @@ public class Spawner : MonoBehaviour
     /// Creates game object from encounter enum.
     /// </summary>
     /// <param name="encounter">The encounter.</param>
-    GameObject CreateGameObjectFromEncounterEnum(Encounter.Type encounter)
+    GameObject CreateGameObjectFromEncounterEnum(Types.Encounter encounter)
     {
         switch (encounter)
         {
-            case Encounter.Type.Fight:
+            case Types.Encounter.Fight:
                 return fight;
-            case Encounter.Type.Chest:
+            case Types.Encounter.Chest:
                 return chest;
-            case Encounter.Type.Merchant:
+            case Types.Encounter.Merchant:
                 return merchant;
             default:
                 return null;

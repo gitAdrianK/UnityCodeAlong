@@ -9,6 +9,8 @@ using UnityEngine;
 /// <seealso cref="MonoBehaviour" />
 public class Icon : MonoBehaviour
 {
+    [SerializeField] private Types.Encounter type;
+
     // Positions snapped to.
     private Vector3 originPoint;
     private Vector3 slotPoint;

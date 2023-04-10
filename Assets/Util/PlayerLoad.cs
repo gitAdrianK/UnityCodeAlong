@@ -64,7 +64,7 @@ public class PlayerLoad : MonoBehaviour
     public void LoadGameWithPepeMaldini()
     {
         Singleton.instance.entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityPepeMaldini));
-        ChangeScene.LoadScene(ChangeScene.Scene.Game);
+        ChangeScene.LoadScene(Types.Scene.Game);
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ public class PlayerLoad : MonoBehaviour
     public void LoadGameWithZebraTheWeebra()
     {
         Singleton.instance.entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityZebraTheWeebra));
-        ChangeScene.LoadScene(ChangeScene.Scene.Game);
+        ChangeScene.LoadScene(Types.Scene.Game);
     }
 
     /// <summary>
@@ -93,7 +93,7 @@ public class PlayerLoad : MonoBehaviour
             goldInt,
             null
             );
-        ChangeScene.LoadScene(ChangeScene.Scene.Game);
+        ChangeScene.LoadScene(Types.Scene.Game);
     }
 
     /// <summary>

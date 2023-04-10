@@ -17,6 +17,7 @@ public class EncounterFight : Encounter
     public override void Start()
     {
         base.Start();
+        type = Types.Encounter.Fight;
         enemies = new LinkedList<Enemy>();
         enemies.AddLast(GetRandomEnemy());
         for (int i = 0; i < 5; i++)

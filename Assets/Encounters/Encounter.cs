@@ -8,15 +8,8 @@ using UnityEngine;
 /// <seealso cref="MonoBehaviour" />
 public abstract class Encounter : MonoBehaviour
 {
-    /// <summary>
-    /// Encounters of the game.
-    /// </summary>
-    public enum Type
-    {
-        Fight,
-        Chest,
-        Merchant,
-    }
+    protected Types.Encounter type;
+    public Types.Encounter Type { get => type; }
 
     // The movespeed. How quickly the encounter moves across the screen.
     private float movespeed;
@@ -24,6 +17,7 @@ public abstract class Encounter : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
+        this.type = Types.Encounter.Default;
         this.movespeed = 250f;
     }
 

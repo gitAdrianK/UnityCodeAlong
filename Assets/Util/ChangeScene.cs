@@ -10,20 +10,10 @@ using UnityEngine.SceneManagement;
 public class ChangeScene : MonoBehaviour
 {
     /// <summary>
-    /// Scenes of the game.
-    /// </summary>
-    public enum Scene
-    {
-        // Make sure the order is the same as in the build settings.
-        Mainmenu,
-        CharacterSelection,
-        Options,
-        Game,
-        GameOver,
-    }
-
-    /// <summary>
     /// Loads scene.
+    /// Preferably use the method that takes a scene enum, it is not possible to
+    /// serialize a private method to the unity inspector, but if it was this
+    /// function would be private.
     /// </summary>
     /// <param name="index">The index.</param>
     public static void LoadScene(int index)
@@ -35,9 +25,9 @@ public class ChangeScene : MonoBehaviour
     /// Loads scene.
     /// </summary>
     /// <param name="scene">The scene.</param>
-    public static void LoadScene(Scene scene)
+    public static void LoadScene(Types.Scene scene)
     {
-        LoadScene((int)scene);
+        SceneManager.LoadScene((int)scene);
     }
 
     /// <summary>

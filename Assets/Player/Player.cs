@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 
         if (this.entityPlayer.CurrentLife <= 0)
         {
-            ChangeScene.LoadScene(ChangeScene.Scene.GameOver);
+            ChangeScene.LoadScene(Types.Scene.GameOver);
         }
     }
 

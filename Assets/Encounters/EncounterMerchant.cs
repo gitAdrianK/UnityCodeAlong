@@ -16,6 +16,7 @@ public class EncounterMerchant : Encounter
     public override void Start()
     {
         base.Start();
+        type = Types.Encounter.Merchant;
     }
 
     // override encounter.HandleEncounter
