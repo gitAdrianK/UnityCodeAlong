@@ -99,11 +99,11 @@ public class SpawnerDialog : Dialog
         {
             GameObject child = slots.transform.GetChild(i).gameObject;
             Slot slot = child.GetComponent<Slot>();
-            Icon icon = slot.Icon.GetComponent<Icon>();
             if (!slot.Icon)
             {
                 return;
             }
+            Icon icon = slot.Icon.GetComponent<Icon>();
             if (icon.Type == Types.Encounter.Chest)
             {
                 toSpawnEncounters.AddLast(Types.Encounter.Chest);
