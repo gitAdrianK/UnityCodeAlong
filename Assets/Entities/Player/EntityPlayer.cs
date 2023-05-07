@@ -51,7 +51,7 @@ public class EntityPlayer : Entity
     /// Adds an item to the players items and modifies the player based on its gain effect.
     /// </summary>
     /// <param name="item">The item to add.</param>
-    public void AddItem(Item item, int count = 1)
+    public void AddItem(Item item, int count)
     {
         if (!item)
         {
@@ -66,6 +66,11 @@ public class EntityPlayer : Entity
             items[item] = ++items[item];
             item.OnItemGained(this);
         }
+    }
+
+    public void AddItem(Item item)
+    {
+        AddItem(item, 1);
     }
 
     public void AddItems(Dictionary<Item, int> items)

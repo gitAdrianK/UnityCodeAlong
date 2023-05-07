@@ -31,6 +31,7 @@ public class EncounterChest : Encounter
         else
         {
             gold = Random.Range(8, 21);
+            items = new Dictionary<Item, int>();
             items.Add(Item.GetRandomItem(), 1);
         }
     }
