@@ -7,10 +7,15 @@ class ModDoubleItem : ModChest
 
     public override void Apply(EncounterChest chest)
     {
-        Dictionary<Item, int> items = chest.Items;
-        foreach (KeyValuePair<Item, int> item in items)
+        if (chest.Items == null)
         {
-            items[item.Key] = item.Value * 2;
+            return;
+        }
+        Dictionary<Item, int> dict = chest.Items;
+        List<Item> items = new List<Item>(chest.Items.Keys);
+        foreach (Item item in items)
+        {
+            dict[item] = dict[item] * 2;
         }
     }
 }

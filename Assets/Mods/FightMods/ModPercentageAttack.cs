@@ -6,6 +6,8 @@ class ModPercentageAttack : ModFight
 
     public override EntityPlayer Apply(EntityPlayer entityPlayer)
     {
-        return null;
+        EntityPlayer tempPlayer = Instantiate(entityPlayer);
+        tempPlayer.ChangeAttackBy((int)(entityPlayer.Attack * 0.1f));
+        return tempPlayer;
     }
 }

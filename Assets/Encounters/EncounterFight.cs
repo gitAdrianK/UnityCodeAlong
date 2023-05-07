@@ -46,7 +46,17 @@ public class EncounterFight : Encounter
     {
         Singleton.instance.Pause();
         GameObject obj = Instantiate(fightDialog, Vector2.zero, Quaternion.identity);
+        EntityPlayer modPlayer;
+        if (mod is ModFight)
+        {
+            ModFight fightMod = (ModFight)mod;
+            modPlayer = fightMod.Apply(player.EntityPlayer);
+        }
+        else
+        {
+            modPlayer = player.EntityPlayer;
+        }
         FightDialog script = obj.GetComponent<FightDialog>();
-        script.Initialize(obj, player, enemies);
+        script.Initialize(obj, player, enemies, modPlayer);
     }
 }

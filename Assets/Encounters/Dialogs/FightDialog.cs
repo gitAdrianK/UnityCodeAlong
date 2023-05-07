@@ -11,6 +11,8 @@ public class FightDialog : Dialog
 {
     // The enemies encountered in the fight.
     private LinkedList<Enemy> enemies;
+    // The player that has had slot mods applied.
+    private EntityPlayer modPlayer;
 
     [SerializeField] private TMP_Text contents;
 
@@ -20,11 +22,12 @@ public class FightDialog : Dialog
     /// <param name="dialog">The dialog.</param>
     /// <param name="player">The player.</param>
     /// <param name="enemies">The enemies.</param>
-    public void Initialize(GameObject dialog, Player player, LinkedList<Enemy> enemies)
+    public void Initialize(GameObject dialog, Player player, LinkedList<Enemy> enemies, EntityPlayer modPlayer)
     {
         this.dialog = dialog;
         this.player = player;
         this.enemies = enemies;
+        this.modPlayer = modPlayer;
         string contents = "";
         foreach (Enemy enemy in enemies)
         {

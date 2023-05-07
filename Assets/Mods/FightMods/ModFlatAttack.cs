@@ -6,6 +6,8 @@ class ModFlatAttack : ModFight
 
     public override EntityPlayer Apply(EntityPlayer entityPlayer)
     {
-        return null;
+        EntityPlayer tempPlayer = Instantiate(entityPlayer);
+        tempPlayer.ChangeAttackBy(4);
+        return tempPlayer;
     }
 }
