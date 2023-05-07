@@ -11,7 +11,10 @@ public class EncounterChest : Encounter
     // The gold the chest contains.
     private int gold;
     // The item the chest contains.
-    private Item item;
+    private Dictionary<Item, int> items;
+
+    public int Gold { get => gold; set => gold = value; }
+    public Dictionary<Item, int> Items { get => items; }
 
     [SerializeField] private GameObject chestDialog;
 
@@ -27,7 +30,8 @@ public class EncounterChest : Encounter
         }
         else
         {
-            item = Item.GetRandomItem();
+            gold = Random.Range(8, 21);
+            items.Add(Item.GetRandomItem(), 1);
         }
     }
 
@@ -37,6 +41,6 @@ public class EncounterChest : Encounter
         Singleton.instance.Pause();
         GameObject obj = Instantiate(chestDialog, Vector2.zero, Quaternion.identity);
         ChestDialog script = obj.GetComponent<ChestDialog>();
-        script.Initialize(obj, player, gold, item);
+        script.Initialize(obj, player, gold, items);
     }
 }

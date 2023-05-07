@@ -54,7 +54,41 @@ public class SpawnerDialog : Dialog
         for (int i = 0; i < count; i++)
         {
             GameObject encounterSlot = Instantiate(iconSlot, Vector2.zero, Quaternion.identity);
+            // Chest mod.
+            Slot encounterSlotScript = encounterSlot.GetComponent<Slot>();
+            switch (Random.Range(0, 2))
+            {
+                case 0:
+                    encounterSlotScript.chestMod = Types.ChestMod.DoubleGold;
+                    encounterSlotScript.SetChestDescription(ModDoubleGold.description);
+                    break;
+                case 1:
+                    encounterSlotScript.chestMod = Types.ChestMod.DoubleItem;
+                    encounterSlotScript.SetChestDescription(ModDoubleItem.description);
+                    break;
+            }
+            // Fight mod.
+            switch (Random.Range(0, 4))
+            {
+                case 0:
+                    encounterSlotScript.fightMod = Types.FightMod.FlatAttack;
+                    encounterSlotScript.SetFightDescription(ModFlatAttack.description);
+                    break;
+                case 1:
+                    encounterSlotScript.fightMod = Types.FightMod.FlatDefense;
+                    encounterSlotScript.SetFightDescription(ModFlatDefense.description);
+                    break;
+                case 2:
+                    encounterSlotScript.fightMod = Types.FightMod.PercentageAttack;
+                    encounterSlotScript.SetFightDescription(ModPercentageAttack.description);
+                    break;
+                case 3:
+                    encounterSlotScript.fightMod = Types.FightMod.PercentageDefense;
+                    encounterSlotScript.SetFightDescription(ModPercentagedefense.description);
+                    break;
+            }
             GameObject encounterIcon = null;
+            // Icons/Encounters.
             switch (Random.Range(0, 2))
             {
                 case 0:
@@ -63,11 +97,13 @@ public class SpawnerDialog : Dialog
                 case 1:
                     encounterIcon = Instantiate(iconFight, Vector2.zero, Quaternion.identity);
                     break;
-                default: /* do nothing, or throw some unreachble exception */ break;
+                default: /* do nothing, or throw some unreachable exception */ break;
             }
 
             encounterSlot.transform.SetParent(slots.transform);
             encounterIcon.transform.SetParent(icons.transform);
+
+            // TODO: Randomly choose a chest and fight mod.
         }
 
         // Add the merchant icon last.
@@ -87,6 +123,13 @@ public class SpawnerDialog : Dialog
 
         playerScript.AddGameObject(playerIcon);
         merchantScript.AddGameObject(merchantIcon);
+
+        // Remove the default mod description.
+        playerScript.SetChestDescription("");
+        playerScript.SetFightDescription("");
+
+        merchantScript.SetChestDescription("");
+        merchantScript.SetFightDescription("");
     }
 
     /// <summary>

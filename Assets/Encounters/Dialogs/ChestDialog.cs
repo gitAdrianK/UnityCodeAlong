@@ -10,7 +10,7 @@ using TMPro;
 public class ChestDialog : Dialog
 {
     private int gold;
-    private Item item;
+    private Dictionary<Item, int> items;
 
     [SerializeField] private TMP_Text contents;
 
@@ -20,18 +20,21 @@ public class ChestDialog : Dialog
     /// <param name="dialog">The dialog.</param>
     /// <param name="player">The player.</param>
     /// <param name="gold">The gold.</param>
-    /// <param name="item">The item.</param>
-    public void Initialize(GameObject dialog, Player player, int gold, Item item)
+    /// <param name="items">The items.</param>
+    public void Initialize(GameObject dialog, Player player, int gold, Dictionary<Item, int> items)
     {
         this.dialog = dialog;
         this.player = player;
         this.gold = gold;
-        this.item = item;
+        this.items = items;
         string contents = "";
         contents += "The chest contains " + gold + " gold and ";
-        if (item)
+        if (items != null)
         {
-            contents += "\n" + item.Name + ".";
+            foreach (KeyValuePair<Item, int> item in items)
+            {
+                contents += "\n" + item.Key.Name + " x" + item.Value + ".";
+            }
         }
         else
         {
@@ -47,7 +50,7 @@ public class ChestDialog : Dialog
     {
         EntityPlayer entityPlayer = player.EntityPlayer;
         entityPlayer.ChangeGoldBy(gold);
-        entityPlayer.AddItem(item);
+        entityPlayer.AddItems(items);
         CloseDialog();
     }
 

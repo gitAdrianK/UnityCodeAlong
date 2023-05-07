@@ -50,6 +50,7 @@ public class Spawner : MonoBehaviour
         {
             return;
         }
+        // Open the spawner dialog when there are no objects on screen or to spawn.
         if (toSpawnEncounters.Count == 0 && activeGameObjects.Count == 0)
         {
             encounterCooldown = 500;
@@ -60,6 +61,7 @@ public class Spawner : MonoBehaviour
             difficulty++;
             return;
         }
+        // If there are encounters to spawn and the cooldown has passed, spawn.
         if (toSpawnEncounters.Count != 0 && encounterCooldown < 0)
         {
             GameObject encounter = Instantiate(

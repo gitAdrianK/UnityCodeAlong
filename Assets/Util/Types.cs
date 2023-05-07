@@ -23,4 +23,24 @@ public class Types
         Chest,
         Merchant,
     }
+
+    /// <summary>
+    /// Chest mods of the game.
+    /// </summary>
+    public enum ChestMod
+    {
+        DoubleGold,
+        DoubleItem,
+    }
+
+    /// <summary>
+    /// Fight mods of the game.
+    /// </summary>
+    public enum FightMod
+    {
+        FlatAttack,
+        FlatDefense,
+        PercentageAttack,
+        PercentageDefense,
+    }
 }
