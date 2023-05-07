@@ -70,6 +70,9 @@ public class Spawner : MonoBehaviour
                 spawnPosition,
                 Quaternion.identity
                 );
+
+            Encounter encounterScript = encounter.GetComponent<Encounter>();
+            AddModToEncounter(encounterScript);
             toSpawnEncounters.RemoveFirst();
             activeGameObjects.AddLast(encounter);
             encounterCooldown = 2000;
@@ -105,6 +108,40 @@ public class Spawner : MonoBehaviour
                 return merchant;
             default:
                 return null;
+        }
+    }
+
+    private void AddModToEncounter(Encounter encounter)
+    {
+        if (toSpawnEncounters.First.Value.Item1 == Types.Encounter.Chest)
+        {
+            switch (toSpawnEncounters.First.Value.Item2)
+            {
+                case Types.ChestMod.DoubleGold:
+                    encounter.mod = (Mod)ScriptableObject.CreateInstance(typeof(ModDoubleGold));
+                    break;
+                case Types.ChestMod.DoubleItem:
+                    encounter.mod = (Mod)ScriptableObject.CreateInstance(typeof(ModDoubleItem));
+                    break;
+            }
+        }
+        else
+        {
+            switch (toSpawnEncounters.First.Value.Item3)
+            {
+                case Types.FightMod.FlatAttack:
+                    encounter.mod = (Mod)ScriptableObject.CreateInstance(typeof(ModFlatAttack));
+                    break;
+                case Types.FightMod.FlatDefense:
+                    encounter.mod = (Mod)ScriptableObject.CreateInstance(typeof(ModFlatDefense));
+                    break;
+                case Types.FightMod.PercentageAttack:
+                    encounter.mod = (Mod)ScriptableObject.CreateInstance(typeof(ModPercentageAttack));
+                    break;
+                case Types.FightMod.PercentageDefense:
+                    encounter.mod = (Mod)ScriptableObject.CreateInstance(typeof(ModPercentagedefense));
+                    break;
+            }
         }
     }
 }

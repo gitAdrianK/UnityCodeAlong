@@ -34,6 +34,11 @@ public class EncounterChest : Encounter
             items = new Dictionary<Item, int>();
             items.Add(Item.GetRandomItem(), 1);
         }
+        if (mod is ModChest)
+        {
+            ModChest chestMod = (ModChest)mod;
+            chestMod.Apply(this);
+        }
     }
 
     // override encounter.HandleEncounter

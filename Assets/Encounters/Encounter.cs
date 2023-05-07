@@ -15,9 +15,8 @@ public abstract class Encounter : MonoBehaviour
     // The movespeed. How quickly the encounter moves across the screen.
     private float movespeed;
 
-    // TODO: Assign mod.
     // The mod associated with this encounter.
-    private Mod mod;
+    public Mod mod;
 
     // Start is called before the first frame update
     public virtual void Start()
