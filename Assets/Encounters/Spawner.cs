@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject spawnerDialog;
     private BoolWrapper isCreating;
 
-    private LinkedList<Types.Encounter> toSpawnEncounters;
+    private LinkedList<Tuple<Types.Encounter, Types.ChestMod, Types.FightMod>> toSpawnEncounters;
     private int encounterCooldown;
 
     // Active game objects. Using an object pool instead of instantiating/destroying might be nice.
@@ -32,7 +33,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        toSpawnEncounters = new LinkedList<Types.Encounter>();
+        toSpawnEncounters = new LinkedList<Tuple<Types.Encounter, Types.ChestMod, Types.FightMod>>();
         encounterCooldown = 500;
 
         difficulty = 0;
@@ -65,7 +66,7 @@ public class Spawner : MonoBehaviour
         if (toSpawnEncounters.Count != 0 && encounterCooldown < 0)
         {
             GameObject encounter = Instantiate(
-                CreateGameObjectFromEncounterEnum(toSpawnEncounters.First.Value),
+                CreateGameObjectFromEncounterEnum(toSpawnEncounters.First.Value.Item1),
                 spawnPosition,
                 Quaternion.identity
                 );

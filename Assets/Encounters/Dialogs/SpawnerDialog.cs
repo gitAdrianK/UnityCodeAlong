@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Spawner dialog.
@@ -24,7 +26,7 @@ public class SpawnerDialog : Dialog
     [SerializeField] private GameObject icons;
 
     private int difficulty;
-    private LinkedList<Types.Encounter> toSpawnEncounters;
+    private LinkedList<Tuple<Types.Encounter, Types.ChestMod, Types.FightMod>> toSpawnEncounters;
 
     private BoolWrapper isCreating;
 
@@ -35,7 +37,7 @@ public class SpawnerDialog : Dialog
     /// <param name="difficulty">The difficulty.</param>
     /// <param name="toSpawnEncounters">The to spawn encounters.</param>
     /// <param name="isCreating">The is paused.</param>
-    public void Initialize(GameObject dialog, int difficulty, LinkedList<Types.Encounter> toSpawnEncounters, BoolWrapper isCreating)
+    public void Initialize(GameObject dialog, int difficulty, LinkedList<Tuple<Types.Encounter, Types.ChestMod, Types.FightMod>> toSpawnEncounters, BoolWrapper isCreating)
     {
         this.dialog = dialog;
         this.difficulty = difficulty;
@@ -102,8 +104,6 @@ public class SpawnerDialog : Dialog
 
             encounterSlot.transform.SetParent(slots.transform);
             encounterIcon.transform.SetParent(icons.transform);
-
-            // TODO: Randomly choose a chest and fight mod.
         }
 
         // Add the merchant icon last.
@@ -149,14 +149,14 @@ public class SpawnerDialog : Dialog
             Icon icon = slot.Icon.GetComponent<Icon>();
             if (icon.Type == Types.Encounter.Chest)
             {
-                toSpawnEncounters.AddLast(Types.Encounter.Chest);
+                toSpawnEncounters.AddLast(Tuple.Create(Types.Encounter.Chest, slot.chestMod, slot.fightMod));
             }
             else if (icon.Type == Types.Encounter.Fight)
             {
-                toSpawnEncounters.AddLast(Types.Encounter.Fight);
+                toSpawnEncounters.AddLast(Tuple.Create(Types.Encounter.Fight, slot.chestMod, slot.fightMod));
             }
         }
-        toSpawnEncounters.AddLast(Types.Encounter.Merchant);
+        toSpawnEncounters.AddLast(Tuple.Create(Types.Encounter.Merchant, Types.ChestMod.None, Types.FightMod.None));
         isCreating.SetFalse();
         CloseDialog();
     }

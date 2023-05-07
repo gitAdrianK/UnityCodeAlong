@@ -29,6 +29,7 @@ public class Types
     /// </summary>
     public enum ChestMod
     {
+        None,
         DoubleGold,
         DoubleItem,
     }
@@ -38,6 +39,7 @@ public class Types
     /// </summary>
     public enum FightMod
     {
+        None,
         FlatAttack,
         FlatDefense,
         PercentageAttack,
