@@ -25,7 +25,6 @@ public class SpawnerDialog : Dialog
     // The encounters gameobject internal encounters are attached to.
     [SerializeField] private GameObject icons;
 
-    private int difficulty;
     private LinkedList<Tuple<Types.Encounter, Types.ChestMod, Types.FightMod>> toSpawnEncounters;
 
     private BoolWrapper isCreating;
@@ -34,13 +33,11 @@ public class SpawnerDialog : Dialog
     /// Initialize.
     /// </summary>
     /// <param name="dialog">The dialog.</param>
-    /// <param name="difficulty">The difficulty.</param>
     /// <param name="toSpawnEncounters">The to spawn encounters.</param>
     /// <param name="isCreating">The is paused.</param>
-    public void Initialize(GameObject dialog, int difficulty, LinkedList<Tuple<Types.Encounter, Types.ChestMod, Types.FightMod>> toSpawnEncounters, BoolWrapper isCreating)
+    public void Initialize(GameObject dialog, LinkedList<Tuple<Types.Encounter, Types.ChestMod, Types.FightMod>> toSpawnEncounters, BoolWrapper isCreating)
     {
         this.dialog = dialog;
-        this.difficulty = difficulty;
         this.toSpawnEncounters = toSpawnEncounters;
         this.isCreating = isCreating;
 
@@ -52,13 +49,13 @@ public class SpawnerDialog : Dialog
         playerSlot.transform.SetParent(slots.transform);
         playerIcon.transform.SetParent(icons.transform);
 
-        int count = difficulty + 3 < 6 ? difficulty + 3 : 6;
+        int count = Singleton.instance.difficulty + 3 < 6 ? Singleton.instance.difficulty + 3 : 6;
         for (int i = 0; i < count; i++)
         {
             GameObject encounterSlot = Instantiate(iconSlot, Vector2.zero, Quaternion.identity);
             // Chest mod.
             Slot encounterSlotScript = encounterSlot.GetComponent<Slot>();
-            switch (Random.Range(0, 2))
+            switch (Random.Range(0, Enum.GetNames(typeof(Types.ChestMod)).Length - 1))
             {
                 case 0:
                     encounterSlotScript.chestMod = Types.ChestMod.DoubleGold;
@@ -70,7 +67,7 @@ public class SpawnerDialog : Dialog
                     break;
             }
             // Fight mod.
-            switch (Random.Range(0, 4))
+            switch (Random.Range(0, Enum.GetNames(typeof(Types.FightMod)).Length - 1))
             {
                 case 0:
                     encounterSlotScript.fightMod = Types.FightMod.FlatAttack;
@@ -91,7 +88,7 @@ public class SpawnerDialog : Dialog
             }
             GameObject encounterIcon = null;
             // Icons/Encounters.
-            switch (Random.Range(0, 2))
+            switch (Random.Range(0, Enum.GetNames(typeof(Types.Encounter)).Length - 1))
             {
                 case 0:
                     encounterIcon = Instantiate(iconChest, Vector2.zero, Quaternion.identity);

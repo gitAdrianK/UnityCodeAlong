@@ -9,7 +9,7 @@ using UnityEngine;
 public class EncounterFight : Encounter
 {
     // The enemies encountered in the fight.
-    private LinkedList<Enemy> enemies;
+    private LinkedList<EntityEnemy> enemies;
 
     [SerializeField] private GameObject fightDialog;
 
@@ -18,27 +18,20 @@ public class EncounterFight : Encounter
     {
         base.Start();
         type = Types.Encounter.Fight;
-        enemies = new LinkedList<Enemy>();
-        enemies.AddLast(GetRandomEnemy());
-        for (int i = 0; i < 5; i++)
-        {
-            if (Random.Range(0, 100 + 1) < 25)
-            {
-                enemies.AddLast(GetRandomEnemy());
-            }
-        }
+        enemies = BuildFightByDifficulty();
     }
 
-    /// <summary>
-    /// Gets random enemy.
-    /// </summary>
-    private Enemy GetRandomEnemy()
+    private LinkedList<EntityEnemy> BuildFightByDifficulty()
     {
-        if (Random.Range(0, 100 + 1) < 10)
+        int remainingDifficulty = Singleton.instance.difficulty;
+        LinkedList<EntityEnemy> enemies = new LinkedList<EntityEnemy>();
+        //TODO: Select enemies based on difficulty.
+        // Fill up remaing difficulty slots with hobos.
+        for (; remainingDifficulty > 0; remainingDifficulty--)
         {
-            return (Enemy)ScriptableObject.CreateInstance(typeof(Gigahobo));
+            enemies.AddLast((EntityEnemy)ScriptableObject.CreateInstance(typeof(EntityHobo)));
         }
-        return (Enemy)ScriptableObject.CreateInstance(typeof(Hobo));
+        return enemies;
     }
 
     // override encounter.HandleEncounter

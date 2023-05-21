@@ -14,9 +14,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject chest;
     [SerializeField] private GameObject merchant;
 
-    // The difficulty determining the amount of encounters between each merchant encounter.
-    private int difficulty;
-
     // Spawner dialog to choose a list of encounters and to spawn once chosen.
     [SerializeField] private GameObject spawnerDialog;
     private BoolWrapper isCreating;
@@ -35,8 +32,6 @@ public class Spawner : MonoBehaviour
     {
         toSpawnEncounters = new LinkedList<Tuple<Types.Encounter, Types.ChestMod, Types.FightMod>>();
         encounterCooldown = 500;
-
-        difficulty = 0;
 
         activeGameObjects = new LinkedList<GameObject>();
         isCreating = new BoolWrapper(false);
@@ -58,8 +53,8 @@ public class Spawner : MonoBehaviour
             isCreating.SetTrue();
             GameObject obj = Instantiate(spawnerDialog, Vector2.zero, Quaternion.identity);
             SpawnerDialog script = obj.GetComponent<SpawnerDialog>();
-            script.Initialize(obj, difficulty, toSpawnEncounters, isCreating);
-            difficulty++;
+            script.Initialize(obj, toSpawnEncounters, isCreating);
+            Singleton.instance.difficulty += 1;
             return;
         }
         // If there are encounters to spawn and the cooldown has passed, spawn.

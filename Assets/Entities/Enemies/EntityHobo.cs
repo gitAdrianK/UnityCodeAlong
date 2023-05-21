@@ -5,15 +5,17 @@ using UnityEngine;
 /// <summary>
 /// Hobo.
 /// </summary>
-/// <seealso cref="Enemy" />
-public class Hobo : Enemy
+/// <seealso cref="EntityEnemy" />
+public class EntityHobo : EntityEnemy
 {
+    public static int difficulty = 1;
+
     /// <summary>
-    /// Initializes a new instance of the <see cref="Hobo"/> class.
+    /// Initializes a new instance of the <see cref="EntityHobo"/> class.
     /// </summary>
-    public Hobo()
+    public EntityHobo()
     {
-        base.Initialize("Hobo", 10, 5, 5);
+        base.Initialize("Hobo", 10, 3, 5);
     }
 
     // override object.ToString

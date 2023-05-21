@@ -18,10 +18,20 @@ public class Types
     /// </summary>
     public enum Encounter
     {
-        Default,
         Fight,
         Chest,
         Merchant,
+    }
+
+    /// <summary>
+    /// Enemies of the game.
+    /// </summary>
+    public enum Enemy
+    {
+        Gangster,
+        Gigahobo,
+        Hobo,
+        Thug,
     }
 
     /// <summary>

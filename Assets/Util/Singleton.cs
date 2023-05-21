@@ -12,6 +12,7 @@ public class Singleton : MonoBehaviour
 
     public EntityPlayer entityPlayer;
     public bool isPaused;
+    public int difficulty;
 
     // Awake is called when the script instance is being loaded
     public void Awake()
@@ -26,6 +27,7 @@ public class Singleton : MonoBehaviour
 
             entityPlayer = (EntityPlayer)ScriptableObject.CreateInstance(typeof(EntityDefault));
             isPaused = false;
+            difficulty = 0;
 
             DontDestroyOnLoad(gameObject);
         }

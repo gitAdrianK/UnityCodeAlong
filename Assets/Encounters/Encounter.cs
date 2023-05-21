@@ -21,7 +21,6 @@ public abstract class Encounter : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
-        this.type = Types.Encounter.Default;
         this.movespeed = 250f;
     }
 

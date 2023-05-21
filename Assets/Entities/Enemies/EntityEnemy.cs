@@ -6,7 +6,7 @@ using UnityEngine;
 /// Enemy.
 /// </summary>
 /// <seealso cref="Entity" />
-public abstract class Enemy : Entity
+public abstract class EntityEnemy : Entity
 {
     /// <summary>
     /// Actions on death.

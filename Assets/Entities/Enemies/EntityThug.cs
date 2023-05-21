@@ -6,16 +6,16 @@ using UnityEngine;
 /// Gigahobo.
 /// </summary>
 /// <seealso cref="EntityEnemy" />
-public class EntityGigahobo : EntityEnemy
+public class EntityThug : EntityEnemy
 {
-    public static int difficulty = 4;
+    public static int difficulty = 2;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="EntityGigahobo"/> class.
+    /// Initializes a new instance of the <see cref="EntityThug"/> class.
     /// </summary>
-    public EntityGigahobo()
+    public EntityThug()
     {
-        base.Initialize("Gigahobo", 50, 7, 7);
+        base.Initialize("Thug", 15, 7, 5);
     }
 
     // override object.ToString
