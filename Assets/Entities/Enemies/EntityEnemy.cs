@@ -8,6 +8,9 @@ using UnityEngine;
 /// <seealso cref="Entity" />
 public abstract class EntityEnemy : Entity
 {
+    protected int difficulty = 1;
+    public int Difficulty { get => difficulty; }
+
     /// <summary>
     /// Actions on death.
     /// </summary>

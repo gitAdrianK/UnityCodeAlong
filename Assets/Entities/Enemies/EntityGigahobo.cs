@@ -8,7 +8,6 @@ using UnityEngine;
 /// <seealso cref="EntityEnemy" />
 public class EntityGigahobo : EntityEnemy
 {
-    public static int difficulty = 4;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EntityGigahobo"/> class.
@@ -16,6 +15,7 @@ public class EntityGigahobo : EntityEnemy
     public EntityGigahobo()
     {
         base.Initialize("Gigahobo", 50, 7, 7);
+        difficulty = 4;
     }
 
     // override object.ToString
