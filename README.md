@@ -1,4 +1,4 @@
-# unity-code-along
+# UnityCodeAlong
 Coding along with ComradeNerdy without any Unity experience.
 
 ## The folder structure for Assets is build along the following concepts:
